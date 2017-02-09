@@ -1,0 +1,11 @@
+.toolbar {
+	background: #3F51B5 !important;
+	color: white;
+	height: 20%;
+}
+.brand {
+	cursor: pointer;
+	font-size: 1.5em;
+	font-weight: bold;
+	margin: auto;
+}
