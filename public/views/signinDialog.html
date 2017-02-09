@@ -1,0 +1,23 @@
+<md-dialog aria-label="Sign Up" class="dialogBox">
+	<md-toolbar class="md-small">
+	    <h2 class="md-toolbar-tools">
+	        <span class="brand">Sign In</span>
+	    </h2>
+    </md-toolbar>
+	<form ng-cloak>
+		<md-dialog-content>
+			<div class="md-dialog-content">
+				<div layout-gt-sm="column">	
+					<md-input-container class="md-block" flex-gt-sm>
+						<label>Email</label>
+						<input ng-model="user.firstName" type="text">
+					</md-input-container>
+					<md-input-container class="md-block" flex-gt-sm>
+						<label>password</label>
+						<input ng-model="theMax" type="password">
+					</md-input-container>
+				</div>
+			</div>
+		</md-dialog-content>
+	</form>
+</md-dialog>
