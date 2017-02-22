@@ -1,1 +1,1 @@
-angular.module('app', ['ngMaterial']);
+var app=angular.module('app', ['ngMaterial','IndexCtrl']);
