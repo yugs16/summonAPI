@@ -1,0 +1,8 @@
+{
+  "name": "angular-material-switch",
+  "version": "1.1.0-master-ce33beb",
+  "dependencies": {
+    "angular-material-core": "1.1.0-master-ce33beb",
+    "angular-material-checkbox": "1.1.0-master-ce33beb"
+  }
+}

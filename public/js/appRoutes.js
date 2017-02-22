@@ -1,25 +1,20 @@
-angular.module('appRoutes',[])
+angular.module('appRoutes', [])
 
 
-.config(function($routeProvider, $locationProvider) {
+.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
 
 	$routeProvider
 
-		.when('/', {
-			templateUrl: 'index.html'
-            // controller: 'mainCtrl'
+		.when('/home', {
+			templateUrl: '../views/home.html'
 		})
-		/*.when('/login', {
-			templateUrl: 'app/views/pages/login.html'
-		})*/
-		.when('/none',{
-          templateUrl:'views/none.html'
+		.when('/about', {
+			templateUrl: '../views/about.html'
 		})
-
-		.when('/signin',{
-          templateUrl:'../views/none.html'
+		.otherwise({
+          redirectTo:'/home'
 		});
 
 	$locationProvider.html5Mode(true);
-
-});
+	}
+]);
