@@ -6,10 +6,10 @@ module.exports=function(app,express){
     var api = express.Router();
 	console.log("came in routesjs 7");
 
-
+	
 	api.get('/signin', function(req, res) {
 
-		console.log("in routes get");
+		console.log("in routesjs 15 a get");
 		//res.render('../public/index.html');
 		// res.render('./public/index.html');
 		res.json("from routes 15");

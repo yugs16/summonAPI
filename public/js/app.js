@@ -1,1 +1,1 @@
-angular.module('app', ['ngMaterial','ngRoute','IndexCtrl']);
+angular.module('app', ['ngMaterial','ngRoute','appRoutes','IndexCtrl']);

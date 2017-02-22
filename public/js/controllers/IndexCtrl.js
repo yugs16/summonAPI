@@ -1,4 +1,4 @@
- angular.module('IndexCtrl')
+ angular.module('IndexCtrl',[])
 	
 	.controller('indexCtrl', ['$scope', '$mdDialog', function($scope, $mdDialog) {
 
