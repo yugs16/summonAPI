@@ -24,7 +24,7 @@ body {
 }
 .brand {
 	cursor: pointer;
-	font-size: xx-large;
+	font-size: 1.5em;
 	font-weight: lighter;
 	margin-left: 2em;
 	margin-top: 1em;

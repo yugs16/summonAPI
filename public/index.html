@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html ng-app="app">
 <head>
-	<base href="/">
 	<title>summon</title>
-
+	<base href="/">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<!-- scripts and links -->
 
 	<script type="text/javascript" src="/lib/jquery.js"></script>
@@ -14,93 +14,29 @@
 	<script src="./lib/angular-aria/angular-aria.min.js"></script>
 	<script type="text/javascript" src="./lib/angular-route.min.js"></script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular-resource.min.js"></script>
-	<script src="//cdnjs.cloudflare.com/ajax/libs/angular-material-icons/0.7.1/angular-material-icons.min.js"></script>
+	<script src="./lib/angular-material-icons/angular-material-icons.min.js"></script>
 	<!-- <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script> -->
     
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    
     <script type="text/javascript" src="/js/controllers/IndexCtrl.js"></script>
     <script type="text/javascript" src="/js/controllers/sideNavCtrl.js"></script>
+    <script type="text/javascript" src="/js/directives/allDirectives.js"></script>
     <script type="text/javascript" src="/js/appRoutes.js"></script>
     <script type="text/javascript" src="/js/app.js"></script>
-    
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
     <link rel="stylesheet" type="text/css" href="./lib/angular-material/angular-material.min.css">
 	<link rel="stylesheet" type="text/css" href="/css/common.css">
 	<link rel="stylesheet" type="text/css" href="css/dialog.css">
 </head>
 <body ng-cloak ng-controller="indexCtrl" layout="column">
 	<div>
-		<md-toolbar class="md-tall md-accent toolbar">
-		    <h2 class="md-toolbar-tools">
-		    	<ng-md-icon 
-		    		ng-controller="LeftCtrl"
-		    		id="menuIcon" 
-		    		hide show-xs 
-		    		ng-click="toogleleft()" 
-		    		icon="menu" 
-		    		style="fill: white" 
-		    		size="30"
-		    	></ng-md-icon>
-		        <span class="brand">Summon<strong>API</strong></span><span flex></span>
-		        <md-button class="signupButton" ng-click="signupDialog($event)">Sign Up</md-button>
-		        <md-button class="signinButton" ng-click="signinDialog($event)">Sign In</md-button>
-		    </h2>
-	    </md-toolbar>
+		<nav-bar></nav-bar>
 	</div>
 	<div layout="row" flex> 
-		<!-- <div flex="20"> -->
-		    <md-sidenav
-		    	md-is-locked-open="$mdMedia('min-width: 600px')"
-		    	md-is-closed="$mdMedia('max-width: 600px')"
-		        class="md-sidenav-left sideNav"
-		        md-component-id="openedNavBar"
-		        flex="100"
-		    >
-		      <md-content layout-padding class="sideNavContent">
-		        <ul class="sideMenuList">
-		        	<li class="sideMenuListItems">
-				    	<a href="/home">Home</a>
-		        	</li>
-		        	<li class="sideMenuListItems">
-				    	<a href="/about">About</a>
-		        	</li>
-		        	<li class="sideMenuListItems">
-				    	<a href="/contact">Contact Us</a>
-		        	</li>
-		        	<li class="sideMenuListItems">
-				    	<a href="/team">Our Team</a>
-		        	</li>
-		        </ul>
-		      </md-content>
-
-		    </md-sidenav>
-		    <md-sidenav
-		    	md-is-closed="$mdMedia('max-width: 600px')"
-		        class="md-sidenav-left hiddensideNav"
-		        md-component-id="hiddenNavBar"
-		        flex="100"
-		    >
-		    	<md-toolbar class="md-theme-indigo sideToolbar">
-        			<h1 class="md-toolbar-tools">Menu</h1>
-      			</md-toolbar>
-		      <md-content layout-padding class="sideNavContent">
-		        <ul class="sideMenuList">
-		        	<li class="sideMenuListItems">
-				    	<a href="/home">Home</a>
-		        	</li>
-		        	<li class="sideMenuListItems">
-				    	<a href="/about">About</a>
-		        	</li>
-		        	<li class="sideMenuListItems">
-				    	<a href="/contact">Contact Us</a>
-		        	</li>
-		        	<li class="sideMenuListItems">
-				    	<a href="/team">Our Team</a>
-		        	</li>
-		        </ul>
-		      </md-content>
-
-		    </md-sidenav>
-		<!-- </div> -->
+		<side-nav></side-nav>
+	    <hidden-side-nav></hidden-side-nav>
 	    <div flex="100">
 		    <div ng-view class="mainContent">routing goes here</div>
 	    </div>
