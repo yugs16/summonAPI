@@ -1,4 +1,4 @@
-
+var user = require('./models/user');
 
 
 module.exports=function(app,express){
@@ -9,20 +9,8 @@ module.exports=function(app,express){
 	
 	api.get('/signin', function(req, res) {
 
-		console.log("in routesjs 15 a get");
-		//res.render('../public/index.html');
-		// res.render('./public/index.html');
-		res.json("from routes 15");
+		console.log("in routesjs 11 a get");
+	
 	});
-
-	//var api = express.Router();
-	// app.get('/', function (req, res) {
-	// 	console.log("came in routes");
-	// 	console.log(__dirname+"../public/index.html");
-	// 	   res.sendFile(__dirname+"../public/index.html");
-	//   // res.sendFile(path+'public/index.html');
-	// });
-
   return api ;
-
 }
