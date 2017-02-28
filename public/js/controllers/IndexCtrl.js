@@ -1,6 +1,6 @@
  angular.module('IndexCtrl',[])
 	
-	.controller('indexCtrl', ['$scope', '$mdDialog', '$route', 'signupService', function($scope, $mdDialog, $route, signupService) {
+	.controller('indexCtrl', ['$scope', '$mdDialog', 'signupService', function($scope, $mdDialog, signupService) {
 
 		$scope.signupDialog = function(ev) {
 			$mdDialog.show({
@@ -40,15 +40,14 @@
 	function signupDialogController($scope,$mdDialog){
 		$scope.sigupDetails = function(){
 			var data = {
-				"fullName" : $scope.user.userName,
+				"username" : $scope.user.userName,
 				"email" : $scope.user.email,
 				"password" : $scope.user.password 
-			}
+			};
 			console.log(data);
 			signupService.userSignup(data)
 				.success(function(data, status, headers, config) {
 					console.log(data);
-					$route.reload();
 				})
 		}
 	};

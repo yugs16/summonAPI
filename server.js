@@ -22,13 +22,16 @@ mongoose.connect(config.database,function(err){
 });
 
 // require('./app/routes')(app); 
+app.use(bodyParser.urlencoded({
+	extended: true
+}));
+app.use(bodyParser.json()); // parse application/json 
+app.use(bodyParser.json({ type: 'application/vnd.api+json' })); // parse application/vnd.api+json as json
 
 var api=require('./app/routes')(app,express);
 app.use('/api',api);
 
 
-app.use(bodyParser.json()); // parse application/json 
-app.use(bodyParser.json({ type: 'application/vnd.api+json' })); // parse application/vnd.api+json as json
 
 app.use(express.static(__dirname + '/public'));
 app.set('views', __dirname + '/public/views');

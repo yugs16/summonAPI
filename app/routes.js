@@ -10,7 +10,8 @@ module.exports=function(app,express){
 	api.post('/signup', function(req, res) {
 
 		console.log("in routesjs 11 a get");
-	
+		console.log(req.headers);
+		console.log(req.body);
 	});
   return api ;
 }
