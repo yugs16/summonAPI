@@ -23,7 +23,7 @@ module.exports=function(app,express){
 				throw err;
 			else{
 				console.log('Server -- User saved successfully!');
-				res.status("User saved successfully!").json(check=1);
+				res.json(check=1);
 			}
 
 		})
@@ -48,8 +48,9 @@ module.exports=function(app,express){
 				cookieName:'login-cookie'
 			};
 
-			res.status("User found").json(data);
+			res.json(data);
 		})
 	});
+
   return api ;
 }
