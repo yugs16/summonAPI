@@ -40,7 +40,7 @@
 	function signupDialogController($scope,$mdDialog){
 		$scope.sigupDetails = function(){
 			var data = {
-				"fullName" : $scope.user.fullName,
+				"fullName" : $scope.user.userName,
 				"email" : $scope.user.email,
 				"password" : $scope.user.password 
 			}
