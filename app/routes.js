@@ -51,6 +51,5 @@ module.exports=function(app,express){
 			res.status("User found").json(data);
 		})
 	});
-
   return api ;
 }
