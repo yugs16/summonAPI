@@ -7,7 +7,7 @@ module.exports=function(app,express){
 	console.log("came in routesjs 7");
 
 	
-	api.get('/signin', function(req, res) {
+	api.post('/signup', function(req, res) {
 
 		console.log("in routesjs 15 a get");
 		//res.render('../public/index.html');

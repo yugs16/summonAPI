@@ -1,7 +1,7 @@
 <md-dialog aria-label="Sign Up" class="dialogBox">
 	<md-toolbar class="md-small">
 	    <h2 class="md-toolbar-tools">
-	        <span class="brand">Sign Up</span>
+	        <span>Sign Up</span>
 	    </h2>
     </md-toolbar>
 	<form ng-cloak>
@@ -10,16 +10,17 @@
 				<div layout-gt-sm="column">
 					<md-input-container class="md-block" flex-gt-sm>
 						<label>Full Name</label>
-						<input ng-model="user.firstName" type="text">
+						<input ng-model="user.fullName" type="text">
 					</md-input-container>		
 					<md-input-container class="md-block" flex-gt-sm>
 						<label>Email</label>
-						<input ng-model="user.firstName" type="text">
+						<input ng-model="user.email" type="email">
 					</md-input-container>
 					<md-input-container class="md-block" flex-gt-sm>
 						<label>password</label>
-						<input ng-model="theMax" type="password">
+						<input ng-model="user.password" type="password">
 					</md-input-container>
+					<md-button class="primary" ng-click="sigupDetails()">Sign up</md-button>
 				</div>
 			</div>
 		</md-dialog-content>
