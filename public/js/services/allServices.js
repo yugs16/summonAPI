@@ -19,7 +19,7 @@ angular.module('allServices', [])
 			userSignin : function(data) {
 				var config = {
 					 headers : {
-					 	'Content-Type': 'json/x-www-form-urlencoded;charset=utf-8;'
+					 	// 'Content-Type': 'json/x-www-form-urlencoded;charset=utf-8;'
 					 }
 				}
 				return $http.post("/api/signin", data, config);

@@ -32,17 +32,17 @@ module.exports=function(app,express){
 
 	api.post('/signin', function(req, res) {
 
-		console.log("in routesjs 32 ");
+		console.log("in routesjs 35 ");
 		// console.log(req.headers);
 		console.log(req.body);
 		//res.json("from routes 15");
 		//var user=new User(req.body);
 		
-		user.find({username:req.body.username,password:req.body.password},function(err,user){
+		User.find({username:req.body.username,password:req.body.password},function(err,user){
 			if(err) throw err;
 			console.log("routes 43");
 			console.log(user);
-			setCookie('login-cookie','1234',{});
+			// setCookie('login-cookie','1234',{});
 			var data={
 				check:1,
 				cookieName:'login-cookie'

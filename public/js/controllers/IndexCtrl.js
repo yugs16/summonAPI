@@ -1,6 +1,6 @@
  angular.module('IndexCtrl',[])
 	
-	.controller('indexCtrl', ['$scope', '$mdDialog', 'signupService', function($scope, $mdDialog, signupService) {
+	.controller('indexCtrl', ['$scope', '$mdDialog', 'signupService', 'signinService', function($scope, $mdDialog, signupService, signinService) {
 
 		$scope.signupDialog = function(ev) {
 			$mdDialog.show({
@@ -44,7 +44,6 @@
 				"email" : $scope.user.email,
 				"password" : $scope.user.password 
 			};
-			console.log(data);
 			signupService.userSignup(data)
 				.success(function(data, status, headers, config) {
 					console.log(data);
@@ -58,7 +57,8 @@
 			var data = {
 				"username" : $scope.user.userName,
 				"password" : $scope.user.password  
-			}
+			};
+			console.log(data);
 			signinService.userSignin(data)
 				.success(function(data, status, headers, config) {
 					console.log(data);
