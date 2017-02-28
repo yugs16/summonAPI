@@ -1,3 +1,22 @@
+/*Author: Nikhil Sangwan, Yugal Jain*/
+
+/*HTML TAG STYLING*/
+body {
+	background: #E0E0E0;
+}
+*:focus {
+	outline: none;
+}
+
+/*CLASSES*/
+.intro_card {
+	position: relative;
+	margin-top: -0.5em;
+	z-index: 10;
+}
+.mainContent {
+	/*text-align: center;*/
+}
 .toolbar {
 	background: #3F51B5 !important;
 	color: white;
@@ -5,7 +24,46 @@
 }
 .brand {
 	cursor: pointer;
-	font-size: xx-large;
+	font-size: 1.5em;
+	font-weight: lighter;
+	margin-left: 2em;
+	margin-top: 1em;
+}
+.sideNav {
+	background: #E0E0E0;
+	min-height: 100%;
+    max-width: 10em !important;
+	overflow: hidden;
+}
+.sideNavContent{
+	background: #E0E0E0;
+	min-height: 100%;
+}
+.sideMenuList {
+	padding: 0;
+}
+.sideMenuListItems {
+	margin: 1em;
+	list-style: none;
+}
+.sideMenuListItems a {
+	color: #424242 !important;
+	font-size: 1em;
 	font-weight: bold;
-	margin: auto;
+	text-decoration: none !important;
+}
+.hiddensideNav {
+	overflow: hidden;
+	max-width: 15em !important;
+	background: #E0E0E0;
+	min-height: 100%;
+}
+.sideToolbar {
+	min-height: 6.4em;
+}
+
+/*ID STYLING*/
+#menuIcon {
+	cursor: pointer;
+	margin-top: auto;
 }

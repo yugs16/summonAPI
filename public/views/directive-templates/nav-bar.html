@@ -1,0 +1,16 @@
+<md-toolbar class="md-tall md-accent toolbar">
+    <h2 class="md-toolbar-tools">
+    	<ng-md-icon 
+    		ng-controller="LeftCtrl"
+    		id="menuIcon" 
+    		hide show-xs 
+    		ng-click="toogleleft()" 
+    		icon="menu" 
+    		style="fill: white" 
+    		size="30">
+    	</ng-md-icon>
+        <span class="brand">Summon<strong>API</strong></span><div flex></div>
+        <md-button class="signupButton" ng-click="signupDialog($event)" hide-xs>Sign Up</md-button>
+        <md-button class="signinButton" ng-click="signinDialog($event)" hide-xs>Sign In</md-button>
+    </h2>
+</md-toolbar>

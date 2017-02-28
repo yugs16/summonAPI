@@ -1,1 +1,1 @@
-angular.module('app', ['ngMaterial', 'ngRoute', 'appRoutes', 'IndexCtrl']);
+angular.module('app', ['ngMaterial', 'ngRoute', 'ngMdIcons', 'appRoutes', 'IndexCtrl', 'sideNavCtrl', 'allDirectives', 'allServices']);
