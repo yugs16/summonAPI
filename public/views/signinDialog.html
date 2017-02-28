@@ -4,7 +4,7 @@
 	        <span class="brand">Sign In</span>
 	    </h2>
     </md-toolbar>
-	<form ng-cloak action="/api/signin">
+	<form ng-cloak>
 		<md-dialog-content>
 			<div class="md-dialog-content">
 				<div layout-gt-sm="column">	
@@ -16,7 +16,7 @@
 						<label>password</label>
 						<input name="password" ng-model="user.password" type="password">
 					</md-input-container>
-					<button type="submit">ADD</button>
+					<md-button class="primary" ng-click="siginDetails()">Sign in</md-button>
 				</div>
 			</div>
 		</md-dialog-content>

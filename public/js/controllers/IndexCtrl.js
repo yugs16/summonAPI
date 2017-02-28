@@ -37,7 +37,7 @@
 		};
 
 	// signupDialog controller
-	function signupDialogController($scope,$mdDialog){
+	function signupDialogController($scope, $mdDialog){
 		$scope.sigupDetails = function(){
 			var data = {
 				"username" : $scope.user.userName,
@@ -52,4 +52,17 @@
 		}
 	};
 
+	// signinDialog controller
+	function signinDialogController($scope, $mdDialog) {
+		$scope.signinDetails = function() {
+			var data = {
+				"username" : $scope.user.userName,
+				"password" : $scope.user.password  
+			}
+			signinService.userSignin(data)
+				.success(function(data, status, headers, config) {
+					console.log(data);
+				})
+		}
+	}
 	}]);

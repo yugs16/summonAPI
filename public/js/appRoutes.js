@@ -11,6 +11,12 @@ angular.module('appRoutes', [])
 		.when('/about', {
 			templateUrl: '../views/about.html'
 		})
+		.when('/contact_us', {
+			templateUrl: '../views/contact_us.html'
+		})
+		.when('/team', {
+			templateUrl: '../views/team.html'
+		})
 		.otherwise({
           redirectTo:'/home'
 		});

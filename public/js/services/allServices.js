@@ -13,3 +13,16 @@ angular.module('allServices', [])
 			}
 		}
 	}])
+
+	.factory('signinService', ['$http', function($http) {
+		return {
+			userSignin : function(data) {
+				var config = {
+					 headers : {
+					 	'Content-Type': 'json/x-www-form-urlencoded;charset=utf-8;'
+					 }
+				}
+				return $http.post("/api/signin", data, config);
+			}
+		}
+	}])

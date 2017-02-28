@@ -3,7 +3,7 @@ var express = require('express');
 var app = express(),
 	config=require('./config'),
 	//indexControllers=require('./app/controllers/index-controllers'),
-	mongoose=require('mongoose');
+	mongoose=require('mongoose'),
 	bodyParser=require('body-parser');
 
 // app.use(express.static(__dirname + '/public'));
