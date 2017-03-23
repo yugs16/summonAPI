@@ -1,28 +1,34 @@
 <md-dialog aria-label="Sign Up" class="dialogBox">
-	<md-toolbar class="md-small">
-	    <h2 class="md-toolbar-tools">
-	        <span>Sign Up</span>
-	    </h2>
-    </md-toolbar>
-	<form ng-cloak>
-		<md-dialog-content>
-			<div class="md-dialog-content">
-				<div layout-gt-sm="column">
-					<md-input-container class="md-block" flex-gt-sm>
-						<label>Username</label>
-						<input ng-model="user.userName" type="text">
-					</md-input-container>		
-					<md-input-container class="md-block" flex-gt-sm>
-						<label>Email</label>
-						<input ng-model="user.email" type="email">
-					</md-input-container>
-					<md-input-container class="md-block" flex-gt-sm>
-						<label>password</label>
-						<input ng-model="user.password" type="password">
-					</md-input-container>
-					<md-button class="primary" ng-click="sigupDetails()">Sign up</md-button>
+	<md-dialog-content>
+		<md-content layout="column">
+			<div flex class="loginIconContainer">
+				<ng-md-icon class="loginIcon" icon="login" style="fill: black" size="64"></ng-md-icon>
+			</div>
+			<div layout="column" flex class="btnContainer">
+				<div flex>
+					<md-button class="md-raised md-primary facebookBtn">
+						<ng-md-icon icon="facebook" style="fill: white" size="24"></ng-md-icon>
+						<span>Login with facebook</span>
+					</md-button>
+				</div>
+				<div flex>
+					<md-button class="md-raised githubBtn">
+						<ng-md-icon icon="github-circle" style="fill: white" size="24"></ng-md-icon>
+						<span>Login with github</span>
+					</md-button>
+				</div>
+				<div flex>
+					<md-button class="md-raised emailBtn">
+						<a href="/login-account" ng-click="closeLoginDialog()">	
+							<ng-md-icon icon="email" style="fill: black" size="24"></ng-md-icon>
+							<span>Login with email</span>
+						</a>
+					</md-button>
+				</div>
+				<div flex class="newAccountContainer">
+					<span>New at Summon?</span><a ng-click="closeLoginDialog()" href="/create-account">Create new account</a>
 				</div>
 			</div>
-		</md-dialog-content>
-	</form>
+		</md-content>
+	</md-dialog-content>
 </md-dialog>

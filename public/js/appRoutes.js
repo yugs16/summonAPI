@@ -9,13 +9,24 @@ angular.module('appRoutes', [])
 			templateUrl: '../views/home.html'
 		})
 		.when('/about', {
-			templateUrl: '../views/about.html'
+			templateUrl: '../views/about.html',
+			controller: 'aboutCtrl'
 		})
 		.when('/contact_us', {
-			templateUrl: '../views/contact_us.html'
+			templateUrl: '../views/contact_us.html',
+			controller: 'contactCtrl'
 		})
 		.when('/team', {
-			templateUrl: '../views/team.html'
+			templateUrl: '../views/team.html',
+			controller: 'teamCtrl'
+		})
+		.when('/create-account', {
+			templateUrl: '../views/create-account.html',
+			controller: 'createAccountCtrl'
+		})
+		.when('/login-account', {
+			templateUrl: '../views/login-account.html',
+			controller: 'IndexCtrl'
 		})
 		.otherwise({
           redirectTo:'/home'

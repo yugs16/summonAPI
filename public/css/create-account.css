@@ -1,0 +1,10 @@
+.createAccountForm {
+	padding: 2em;
+}
+.createAccountBtnContainer {
+	text-align: center;
+}
+.createAccountBtn ng-md-icon {
+	position: relative;
+	top: 7px;
+}

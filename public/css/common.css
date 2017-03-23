@@ -11,8 +11,11 @@ body {
 /*CLASSES*/
 .intro_card {
 	position: relative;
-	margin-top: -0.5em;
-	z-index: 10;
+    margin: auto;
+    margin-top: -0.5em;
+    z-index: 10;
+    border-radius: 0px;
+    width: 80%;
 }
 .mainContent {
 	/*text-align: center;*/

@@ -1,3 +1,59 @@
 .dialogBox {
-	min-width: 80% !important;
+	border-radius: 0px;
+	min-width: auto !important;
+}
+.loginIconContainer {
+	padding: 2em;
+}
+.loginIcon {
+	position: relative;
+	left: 33%;
+}
+.btnContainer {
+	text-align: center;
+}
+.facebookBtn {
+	min-width: auto;
+	border-radius: 0;
+	color: white;
+}
+.facebookBtn ng-md-icon {
+	position: relative;
+	top: 7px;
+}
+.githubBtn {
+	background: black !important;
+	min-width: auto;
+	border-radius: 0;
+	color: white;
+}
+.githubBtn span {
+	color: white;
+}
+.githubBtn ng-md-icon {
+	position: relative;
+	top: 7px;
+}
+.emailBtn {
+	min-width: auto;
+	border-radius: 0;
+	color: white;
+}
+.emailBtn a {
+	text-decoration: none;
+	color: black;
+}
+.emailBtn ng-md-icon {
+	position: relative;
+	top: 7px;
+}
+.newAccountContainer {
+	padding: 1em;
+}
+.newAccountContainer span {
+	font-size: smaller;
+}
+.newAccountContainer a {
+	font-size: smaller;
+	text-decoration: none;
 }
