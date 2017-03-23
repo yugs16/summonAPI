@@ -4,10 +4,7 @@ var app = express(),
 	config=require('./config'),
 	//indexControllers=require('./app/controllers/index-controllers'),
 	mongoose=require('mongoose');
-	bodyParser=require('body-parser'),
-	cookies=require('cookies'),
-	cookieParser=require('cookie-parser'),
-	session=require('express-session');
+	bodyParser=require('body-parser');
 
 
 // app.use(express.static(__dirname + '/public'));
@@ -54,11 +51,10 @@ app.use('/js',express.static(__dirname + '/public'));
 
 
 app.get('*',function(req,res){
-	// console.log("from server 40");
-	// console.log(req.cookies);
-	// console.log("---------------");
-	// console.log(req.session);	
-    //res.sendFile(__dirname +'/public/index.html'); 
+		
+   	console.log("**came");
+    res.sendFile(__dirname +'/public/index.html'); 
+
 })
 
 // app.get('/', function (req, res) {
