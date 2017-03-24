@@ -8,5 +8,5 @@ var user=new mongoose.Schema({
 	password:{type:'String',default:''}
 },{collection: 'users' });
 
-module.exports = mongoose.model('user',user);
+module.exports = mongoose.model('User',user);
 

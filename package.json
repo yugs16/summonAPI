@@ -9,14 +9,16 @@
   },
   "author": "yugal",
   "license": "BSD-2-Clause",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/lovingyugs/summonAPI.git"
+  },
   "dependencies": {
-    "express": "~4.14.1",
-    "mongoose": "~4.8.3",
     "body-parser": "~1.16.1",
+    "express": "^4.15.2",
+    "jsonwebtoken": "^7.3.0",
     "method-override": "~2.3.7",
-    "cookies": "~0.7.0",
-    "cookie-parser": "~1.4.3",
-    "express-session": "~1.15.1",
-    "set-cookie": "0.0.4"
+    "mongoose": "~4.8.3",
+    "morgan": "^1.8.1"
   }
 }
