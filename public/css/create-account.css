@@ -1,6 +1,12 @@
 .createAccountForm {
 	padding: 2em;
 }
+.createAccountForm md-input-container {
+	width: 60%;
+	margin: auto;
+	margin-top: 1em;
+	margin-bottom: 1em;
+}
 .createAccountBtnContainer {
 	text-align: center;
 }

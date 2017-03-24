@@ -1,6 +1,6 @@
  angular.module('IndexCtrl',[])
 	
-	.controller('indexCtrl', ['$scope', '$mdDialog', 'signupService', 'signinService', function($scope, $mdDialog, signupService, signinService) {
+	.controller('indexCtrl', ['$scope', '$mdDialog', 'signupService', 'signinService', '$location', function($scope, $mdDialog, $location, signupService, signinService) {
 
 		$scope.loginDialog = function(ev) {
 			$mdDialog.show({
@@ -19,7 +19,7 @@
 		};
 
 		// loginDialog controller
-		function loginDialogController($scope, $mdDialog){
+		function loginDialogController($scope, $mdDialog, $location){
 			$scope.loginAccount = function(){
 				var data = {
 					"username" : $scope.user.userName,
@@ -32,6 +32,7 @@
 			}
 			// close loginDialog
 			$scope.closeLoginDialog = function() {
+				$location.path('/login-account');
 				$mdDialog.hide();
 			}
 		};
