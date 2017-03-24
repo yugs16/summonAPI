@@ -2,10 +2,9 @@
 var express = require('express');
 var app = express(),
 	config=require('./config'),
-	//indexControllers=require('./app/controllers/index-controllers'),
 	mongoose=require('mongoose');
-	bodyParser=require('body-parser');
-
+	bodyParser=require('body-parser'),
+	morgan   = require('morgan');
 
 // app.use(express.static(__dirname + '/public'));
 
@@ -22,14 +21,9 @@ mongoose.connect(config.database,function(err){
 		console.log('Connected to the database');
 	}
 });
-
+// app.set('superSecret', config.secret); 
 // require('./app/routes')(app); 
 
-app.use(cookieParser());
-app.use(session({secret:'sdaklasmaskldkads',
-				saveUninitialized:true,
-				resave:true	
-			}));
 
 
 app.use(bodyParser.urlencoded({
@@ -39,6 +33,7 @@ app.use(bodyParser.json()); // parse application/json
 
 // app.use(bodyParser.json({ type: 'json/vnd.api+json' })); // parse application/vnd.api+json as json
 
+app.use(morgan('dev'));
 var api=require('./app/routes')(app,express);
 app.use('/api',api);
 
@@ -54,7 +49,6 @@ app.get('*',function(req,res){
 		
    	console.log("**came");
     res.sendFile(__dirname +'/public/index.html'); 
-
 })
 
 // app.get('/', function (req, res) {
@@ -73,4 +67,4 @@ app.listen(config.port, function (err) {
     }
 });
 
-exports = module.exports = app;
+// exports = module.exports = app;
