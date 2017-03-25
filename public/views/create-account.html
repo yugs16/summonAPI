@@ -7,14 +7,14 @@
 			<form name="createAccountForm" class="md-padding createAccountForm">
 				<md-input-container class="md-block">
 					<label>User Email</label>
-					<input required name="clientName" type="email" ng-model="project.clientName">
+					<input required name="username" type="email" ng-model="user.email">
 					<div ng-messages="createAccountForm.clientName.$error">
 						<div ng-message="required">This is required.</div>
 					</div>
 				</md-input-container>
 				<md-input-container class="md-block">
 					<label>User Password</label>
-					<input required name="clientPasword" type="password" ng-model="project.clientPasword">
+					<input required name="userpassword" type="password" ng-model="user.password">
 					<div ng-messages="createAccountForm.clientName.$error">
 						<div ng-message="required">This is required.</div>
 					</div>
