@@ -28,7 +28,7 @@ module.exports=function(app,express){
 
 					// if user is found and password is right
 					// create a token
-					var token = jwt.sign(user, superSecret,{ expiresIn:'3m'});
+					var token = jwt.sign(user, superSecret,{ expiresIn:'2m'});
 
 					// return the information including token as JSON
 					res.json({
