@@ -17,6 +17,11 @@ body {
     border-radius: 0px;
     width: 80%;
 }
+.intro_card img {
+	width: auto;
+	max-height: 250px;
+	object-fit: cover;
+}
 .mainContent {
 	/*text-align: center;*/
 }
@@ -29,8 +34,9 @@ body {
 	cursor: pointer;
 	font-size: 1.5em;
 	font-weight: lighter;
-	margin-left: 2em;
-	margin-top: 1em;
+	margin: auto;
+	margin-top: 0.6em;
+	margin-left: 0.5em;
 }
 .sideNav {
 	background: #E0E0E0;
@@ -46,7 +52,7 @@ body {
 	padding: 0;
 }
 .sideMenuListItems {
-	margin: 1em;
+	margin: 2px;
 	list-style: none;
 }
 .sideMenuListItems a {

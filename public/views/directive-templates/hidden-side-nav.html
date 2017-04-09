@@ -1,25 +1,28 @@
-<md-sidenav
-	md-is-closed="$mdMedia('max-width: 600px')"
-    class="md-sidenav-left hiddensideNav"
-    md-component-id="hiddenNavBar"
-    flex="100">
-	<md-toolbar class="md-theme-indigo sideToolbar">
-		<h1 class="md-toolbar-tools">Menu</h1>
-		</md-toolbar>
-  	<md-content layout-padding class="sideNavContent">
-	    <ul class="sideMenuList">
-	    	<li class="sideMenuListItems">
-		    	<a href="/home">Home</a>
-	    	</li>
-	    	<li class="sideMenuListItems">
-		    	<a href="/about">About</a>
-	    	</li>
-	    	<li class="sideMenuListItems">
-		    	<a href="/contact">Contact Us</a>
-	    	</li>
-	    	<li class="sideMenuListItems">
-		    	<a href="/team">Our Team</a>
-	    	</li>
-	    </ul>
-  </md-content>
-</md-sidenav>
+<section ng-controller="hiddensideNavCtrl">
+	<md-sidenav
+		md-is-closed="$mdMedia('max-width: 600px')"
+	    class="md-sidenav-left hiddensideNav"
+	    md-component-id="hiddenNavBar"
+	    flex="100"
+	    >
+		<md-toolbar class="md-theme-indigo sideToolbar">
+			<h1 class="md-toolbar-tools">Menu</h1>
+			</md-toolbar>
+	  	<md-content layout-padding class="sideNavContent">
+		    <md-list class="sideMenuList">
+	 			<md-list-item class="sideMenuListItems" class="md-3-line" ng-click="redirectHomePage()">
+					<span>Home</span>
+				</md-list-item>
+				<md-list-item class="sideMenuListItems" class="md-3-line" ng-click="redirectAboutPage()">
+					<span>About</span>
+				</md-list-item>
+				<md-list-item class="sideMenuListItems" class="md-3-line" ng-click="redirectContactPage()">
+					<span>Contact Us</span>
+				</md-list-item>
+				<md-list-item class="sideMenuListItems" class="md-3-line" ng-click="redirectTeamPage()">
+					<span>Our Team</span>
+				</md-list-item>
+			</md-list>
+	  </md-content>
+	</md-sidenav>
+</section>

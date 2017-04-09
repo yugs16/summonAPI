@@ -1,24 +1,31 @@
 <section layout="column">
-	<form name="createAccountForm" class="md-padding createAccountForm">
-		<md-input-container class="md-block">
-			<label>User Email</label>
-			<input required name="clientName" type="email" ng-model="project.clientName">
-			<div ng-messages="createAccountForm.clientName.$error">
-				<div ng-message="required">This is required.</div>
-			</div>
-		</md-input-container>
-		<md-input-container class="md-block">
-			<label>User Password</label>
-			<input required name="clientPasword" type="password" ng-model="project.clientPasword">
-			<div ng-messages="createAccountForm.clientName.$error">
-				<div ng-message="required">This is required.</div>
-			</div>
-		</md-input-container>
-		<md-input-container class="md-block createAccountBtnContainer">
-			<md-button class="md-raised createAccountBtn" ng-click="createAccount()">
-				<ng-md-icon icon="send" style="fill: black" size="24"></ng-md-icon>
-				<span>Create Account</span>
-			</md-button>
-		</md-input-container>
-	</form>	
+	<md-card class="createAccountCard">
+		<md-card-title>
+			<md-card-title-text></md-card-title-text>
+		</md-card-title>
+		<md-card-content>
+			<form name="createAccountForm" class="md-padding createAccountForm">
+				<md-input-container class="md-block">
+					<label>User Email</label>
+					<input required name="username" type="email" ng-model="user.email">
+					<div ng-messages="createAccountForm.clientName.$error">
+						<div ng-message="required">This is required.</div>
+					</div>
+				</md-input-container>
+				<md-input-container class="md-block">
+					<label>User Password</label>
+					<input required name="userpassword" type="password" ng-model="user.password">
+					<div ng-messages="createAccountForm.clientName.$error">
+						<div ng-message="required">This is required.</div>
+					</div>
+				</md-input-container>
+				<md-input-container class="md-block createAccountBtnContainer">
+					<md-button class="md-raised createAccountBtn" ng-click="createAccount()">
+						<ng-md-icon icon="send" style="fill: black" size="24"></ng-md-icon>
+						<span>Create Account</span>
+					</md-button>
+				</md-input-container>
+			</form>	
+		</md-card-content>
+	</md-card>
 </section>
