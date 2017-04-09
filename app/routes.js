@@ -1,9 +1,12 @@
 var User = require('./models/user');
 var config=require('../config'), 
-	jwt=require('jsonwebtoken');
+	jwt=require('jsonwebtoken'),
+	autho = require("node-autho");	
 
- var superSecret = config.secret;
+var superSecret = config.secret,
+	passwordKey = config.passwordKey;
 
+var loggedOnUser =false;
 
 module.exports=function(app,express){
 	
@@ -24,17 +27,17 @@ module.exports=function(app,express){
 			} else if (user) {
 
 				// check if password matches
-				if (user.password != req.body.password) {
+				var decrypted = autho.decrypt(user.password, passwordKey);
+				if (decrypted != req.body.password) {
 					res.json({ success: false, message: 'Authentication failed. Wrong password.' });
 				} else {
 					
 					// if user is found and password is right
 					// create a token
-					var token = jwt.sign(user, superSecret,{ expiresIn:'20m'});
-
+					var token = jwt.sign(user, superSecret,{ expiresIn:'1h'});
 					// return the information including token as JSON
 					res.cookie('connect.auth', token, {  
-						expires: new Date(Date.now() + 900000),
+						expires: new Date(Date.now() + 30*60*1000), //hrs*mins*secs*minisecs
   						httpOnly: false
    					});
 
@@ -50,33 +53,26 @@ module.exports=function(app,express){
 	
 	api.post('/signup', function(req, res) {
 
-		console.log("in routesjs 11 ");
-		// console.log(req.headers);
-		console.log(req.body);
-		//res.json("from routes 15");
-		
 		User.findOne({
 			$or:[ {username:req.body.username}, {email:req.body.email}]
 		},function(err,user){
-			console.log("came");
-			if (err) {
-				throw err;
-			}
+
+			if (err) throw err;
+
 			if(user){
-				//console.log(user);
 				res.status(400).json({
 					"msg":"User already exists.",
 					"check":0
 				})
 			}
 			else{
-
+				var password = autho.encrypt(req.body.password,passwordKey);
+				req.body.password = password;
 				var user=new User(req.body);
 				user.save(function(err,instance){
 					if(err) 
 						throw err;
 					if(!instance){
-						console.log("eroor");
 						res.status(200).json({
 							"check":0,
 							"msg":"OOPS! Something went Wrong."
@@ -94,44 +90,23 @@ module.exports=function(app,express){
 		})
 	});
 
-	// api.post('/signin', function(req, res) {
-
-	// 	console.log("in routesjs 35 ");
-	// 	// console.log(req.headers);
-	// 	console.log(req.body);
-	// 	//res.json("from routes 15");
-	// 	//var user=new User(req.body);
-		
-	// 	User.findOne({username:req.body.username,password:req.body.password},function(err,user){
-	// 		if(err) throw err;
-	// 		console.log("routes 43");
-	// 		console.log(user);
-	// 		// setCookie('login-cookie','1234',{});
-	// 		var data={
-	// 			check:1,
-	// 			cookieName:'login-cookie'
-	// 		};
-	// 		res.json(data);
-	// 	})
-	// });
 
 	api.get('/checkout',function(req,res){
 		console.log("came in login");
 		res.sendFile(config.path +'/public/test.html');
 	});
 
-
-
 	api.use(function(req, res, next) {
 
 		// check header or url parameters or post parameters for token
 		var token = req.body.token || req.query.token || req.headers['x-access-token'];
 		if (token) {
-			jwt.verify(token,config.secret, function(err, decoded) {      
+			jwt.verify(token,superSecret, function(err, decoded) {      
 			  if (err) {
 			    return res.json({ success: false, message: 'Failed to authenticate token.' });    
 			  } else {
 			    // if everything is good, save to request for use in other routes
+			   	loggedOnUser = true;
 			   	req.decoded = decoded;
 			  	req.body = decoded._doc;  
 			   	req.token = token; 
@@ -139,19 +114,15 @@ module.exports=function(app,express){
 			    next();
 			  }
 			});
-
 		} else {
+			var loggedOnUser = false;
+			// res.status(403).send({ 
+			//     success: false, 
+			//     message: 'No token provided.' 
+			// });
 
-			// if there is no token
-			// return an error
-			res.status(403).send({ 
-			    success: false, 
-			    message: 'No token provided.' 
-			});
-
-			}
+		}
 	});
-
 	
 	api.get('/payments',function(req,res){
 		console.log("came in 8000 /payments");
@@ -179,16 +150,31 @@ module.exports=function(app,express){
 	});
 
 	api.get('/me',function(req,res){
-		console.log("in routesjs /users");
-		var data={
-			username:req.body.username,
-			email:req.body.email,
-			token:req.token
-		};
-		console.log(req.body);
-		res.status(200).json(data);
+		if(loggedOnUser){
+			console.log("in routesjs /users");
+			var data = {
+				username:req.body.username,
+				email:req.body.email,
+				token:req.token
+			};
+			console.log(req.body);
+			res.status(200).json(data);
+		}
+		else{
+			// var data = [
+			// 	{
+			// 		title:
+
+			// 	},{
+
+			// 	}
+			// ]
+
+			res.status(200).json({
+				trending:true,
+				loggedOnUser:false
+			});
+		}
 	});
-	
   return api ;
 }
-
