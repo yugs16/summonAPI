@@ -12,10 +12,11 @@ angular.module('createAccountCtrl', [])
 				}else{
 					signupService.userSignup(data)
 						.success(function(data, status, headers, config) {
-							console.log(data + ', ' + status);
+							console.log(data);
 							$location.path('/login-account');
 						}).error(function(err){
 							console.log('error occured:' + err);
+							console.log(err);
 						})
 				}
 		}
