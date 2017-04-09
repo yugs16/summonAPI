@@ -6,8 +6,15 @@
 		<md-card-content>
 			<form name="createAccountForm" class="md-padding createAccountForm">
 				<md-input-container class="md-block">
+					<label>Username</label>
+					<input required name="username" type="text" ng-model="user.username">
+					<div ng-messages="createAccountForm.clientName.$error">
+						<div ng-message="required">This is required.</div>
+					</div>
+				</md-input-container>
+				<md-input-container class="md-block">
 					<label>User Email</label>
-					<input required name="username" type="email" ng-model="user.email">
+					<input required name="email" type="email" ng-model="user.email">
 					<div ng-messages="createAccountForm.clientName.$error">
 						<div ng-message="required">This is required.</div>
 					</div>

@@ -28,6 +28,11 @@
 				};
 				signupService.userSignup(data)
 					.success(function(data, status, headers, config) {
+						console.log(data);
+						
+					})
+					.error(function(err) {
+						console.log('error occured:' + err);
 					})
 			}
 			// close loginDialog

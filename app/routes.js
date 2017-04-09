@@ -55,10 +55,12 @@ module.exports=function(app,express){
 		//res.json("from routes 15");
 
 		var user=new User(req.body);
-		user.save(function(err){
+		user.save(function(err, instance){
 			if(err) 
 				throw err;
-			else{
+			if(!instance){
+				res.status(400).json(check=0);
+			}else{
 				console.log('Server -- User saved successfully!');
 				res.status(200).json(check=1);
 			}

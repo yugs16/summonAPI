@@ -7,8 +7,12 @@
 			<md-content>
 				<form name="loginAccountForm" class="md-padding md-form loginAccountForm">
 					<md-input-container class="md-block">
-						<label>Email</label>
+						<label>Username</label>
 						<input required="" name="username" ng-model="user.userName" type="text"/>
+					</md-input-container>
+					<md-input-container class="md-block">
+						<label>Password</label>
+						<input required="" name="password" ng-model="user.password" type="password"/>
 					</md-input-container>
 				</form>
 				<button class="md-button md-raised ">Enter</button>
