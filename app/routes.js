@@ -78,7 +78,7 @@ module.exports=function(app,express){
 					if(!instance){
 						console.log("eroor");
 						res.status(200).json({
-							"check":1,
+							"check":0,
 							"msg":"OOPS! Something went Wrong."
 						});
 					}
@@ -126,11 +126,7 @@ module.exports=function(app,express){
 
 		// check header or url parameters or post parameters for token
 		var token = req.body.token || req.query.token || req.headers['x-access-token'];
-
-		// decode token
 		if (token) {
-
-			// verifies secret and checks exp
 			jwt.verify(token,config.secret, function(err, decoded) {      
 			  if (err) {
 			    return res.json({ success: false, message: 'Failed to authenticate token.' });    
