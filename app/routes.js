@@ -35,7 +35,7 @@ module.exports=function(app,express){
 					// return the information including token as JSON
 					res.cookie('connect.auth', token, {  
 						expires: new Date(Date.now() + 900000),
-  						httpOnly: true
+  						httpOnly: false
    					});
 
 					res.json({
@@ -78,7 +78,7 @@ module.exports=function(app,express){
 					if(!instance){
 						console.log("eroor");
 						res.status(200).json({
-							"check":1,
+							"check":0,
 							"msg":"OOPS! Something went Wrong."
 						});
 					}
