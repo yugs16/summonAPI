@@ -35,7 +35,7 @@ module.exports=function(app,express){
 					// return the information including token as JSON
 					res.cookie('connect.auth', token, {  
 						expires: new Date(Date.now() + 900000),
-  						httpOnly: true
+  						httpOnly: false
    					});
 
 					res.json({

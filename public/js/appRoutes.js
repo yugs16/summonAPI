@@ -27,7 +27,7 @@ angular.module('appRoutes', [])
 		})
 		.when('/login-account', {
 			templateUrl: '../views/login-account.html',
-			controller: 'IndexCtrl'
+			controller: 'loginCtrl'
 		})
 		.otherwise({
           redirectTo:'/home'

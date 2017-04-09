@@ -8,14 +8,14 @@
 				<form name="loginAccountForm" class="md-padding md-form loginAccountForm">
 					<md-input-container class="md-block">
 						<label>Username</label>
-						<input required="" name="username" ng-model="user.userName" type="text"/>
+						<input required="" name="username" ng-model="user.username" type="text"/>
 					</md-input-container>
 					<md-input-container class="md-block">
 						<label>Password</label>
 						<input required="" name="password" ng-model="user.password" type="password"/>
 					</md-input-container>
 				</form>
-				<button class="md-button md-raised ">Enter</button>
+				<button class="md-button md-raised" ng-click="loginAccount()">Enter</button>
 			</md-content>
 		</md-card-content>
 	</md-card>

@@ -20,6 +20,7 @@
     "method-override": "~2.3.7",
     "mongoose": "~4.8.3",
     "morgan": "^1.8.1",
+    "ng-cookies": "^1.0.2",
     "nodemon": "^1.11.0"
   }
 }
