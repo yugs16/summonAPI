@@ -47,6 +47,9 @@
 	position: relative;
 	top: 7px;
 }
+.facebookBtn, .githubBtn, .emailBtn {
+	width: 15em !important;
+}
 .newAccountContainer {
 	padding: 1em;
 }
