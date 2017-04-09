@@ -12,6 +12,7 @@ module.exports=function(app,express){
 	//app.set('superSecret', config.secret); 
 	api.post('/signin', function(req, res) {
 		console.log(superSecret);
+		
 		User.findOne({
 			username: req.body.username
 		}, function(err, user) {
@@ -54,13 +55,40 @@ module.exports=function(app,express){
 		console.log(req.body);
 		//res.json("from routes 15");
 
-		var user=new User(req.body);
-		user.save(function(err){
-			if(err) 
+
+		
+		User.find({
+			$or:[ {'username':req.body.username}, {'email':req.body.email}]
+		},function(err,user){
+			if (err) {
 				throw err;
+			}
+			if(user){
+				res.status(400).json({
+					"msg":"User already exists."
+					"check":0
+				})
+			}
 			else{
-				console.log('Server -- User saved successfully!');
-				res.status(200).json(check=1);
+				var user=new User(req.body);
+				user.save(function(err,instance){
+					if(err) 
+						throw err;
+					if(!instance){
+						console.log("eroor");
+						res.status(200).json({
+							"check":1
+							"msg":"OOPS! Something went Wrong."
+						});
+					}
+					else{
+						console.log('Server -- User saved successfully!');
+						res.status(200).json({
+							"check":1
+							"msg":"User saved successfully! Now Signin."
+						});
+					}
+				});
 			}
 		})
 	});
