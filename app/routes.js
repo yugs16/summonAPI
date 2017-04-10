@@ -18,8 +18,9 @@ module.exports=function(app,express){
 		
 		User.findOne({
 			username: req.body.username
-		}, function(err, user) {
+		}).exec(function(err, user) {
 
+			//console.log(user);
 			if (err) throw err;
 
 			if (!user) {
@@ -31,11 +32,17 @@ module.exports=function(app,express){
 				if (decrypted != req.body.password) {
 					res.json({ success: false, message: 'Authentication failed. Wrong password.' });
 				} else {
-					
-					// if user is found and password is right
-					// create a token
-					var token = jwt.sign(user, superSecret,{ expiresIn:'1h'});
-					// return the information including token as JSON
+					var data = {
+						username:user.username,
+						email:user.email
+					};
+					//console.log(data);
+
+					var token = jwt.sign({
+						username:user.username,
+						email:user.email
+					}, superSecret,{ expiresIn:'1h'});
+
 					res.cookie('connect_auth', token, {  
 						expires: new Date(Date.now() + 30*60*1000), //hrs*mins*secs*minisecs
   						httpOnly: false
@@ -101,7 +108,8 @@ module.exports=function(app,express){
 		// check header or url parameters or post parameters for token
 
 		var token;
-		console.log(req.cookies.connect_auth);
+		console.log(req.cookies);
+		// console.log(req.cookies.connect_auth);
 		if(req.cookies.connect_auth){
 			token = req.cookies.connect_auth;
 		}
@@ -114,16 +122,16 @@ module.exports=function(app,express){
 			    return res.json({ success: false, message: 'Failed to authenticate token.' });    
 			  } else {
 			    // if everything is good, save to request for use in other routes
-			   	loggedOnUser = true;
-			   	req.decoded = decoded;
-			  	req.body = decoded._doc;  
+			   	req.loggedOnUser =true;
+			   	console.log(decoded);
+			   	req.body.decoded = decoded;  
+			   	// console.log(decoded._doc);
 			   	req.token = token; 
-			    console.log(decoded._doc); 
 			    next();
 			  }
 			});
 		} else {
-			var loggedOnUser = false;
+			req.loggedOnUser = false;
 			next();
 			// res.status(403).send({ 
 			//     success: false, 
@@ -159,11 +167,13 @@ module.exports=function(app,express){
 	});
 
 	api.get('/me',function(req,res){
-		if(loggedOnUser){
+		//console.log(loggedOnUser);
+		
+		if(req.loggedOnUser){
 			console.log("in routesjs /users");
 			var data = {
-				username:req.body.username,
-				email:req.body.email,
+				username:req.body.decoded.username,
+				email:req.body.decoded.email,
 				token:req.token
 			};
 			console.log(req.body);
