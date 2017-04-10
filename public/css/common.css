@@ -30,6 +30,10 @@ body {
 	color: white;
 	height: 20%;
 }
+.userProfileImg {
+	border: 3px solid white;
+	border-radius: 999px;
+}
 .brand {
 	cursor: pointer;
 	font-size: 1.5em;

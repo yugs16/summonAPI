@@ -6,6 +6,7 @@ angular.module('homeCtrl', [])
 
 			userDataService.getData()
 				.success(function(resp) {
+					$scope.userData = resp;
 					console.log(resp);
 				})
 				.error(function(err) {

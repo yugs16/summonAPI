@@ -174,7 +174,8 @@ module.exports=function(app,express){
 			var data = {
 				username:req.body.decoded.username,
 				email:req.body.decoded.email,
-				token:req.token
+				token:req.token,
+				loggedOnUser:true
 			};
 			console.log(req.body);
 			res.status(200).json(data);
