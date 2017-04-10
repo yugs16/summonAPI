@@ -11,7 +11,7 @@ angular.module('loginCtrl', [])
 				.success(function(data, status, headers, config) {
 					console.log(data);
 					console.log('in loginCtrl');
-					$window.location.reload();
+					$window.location.href = '/';
 					// $location.path('/');
 				})
 				.error(function(err) {
