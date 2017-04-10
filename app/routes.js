@@ -36,7 +36,7 @@ module.exports=function(app,express){
 					// create a token
 					var token = jwt.sign(user, superSecret,{ expiresIn:'1h'});
 					// return the information including token as JSON
-					res.cookie('connect.auth', token, {  
+					res.cookie('connect_auth', token, {  
 						expires: new Date(Date.now() + 30*60*1000), //hrs*mins*secs*minisecs
   						httpOnly: false
    					});
@@ -99,7 +99,15 @@ module.exports=function(app,express){
 	api.use(function(req, res, next) {
 
 		// check header or url parameters or post parameters for token
-		var token = req.body.token || req.query.token || req.headers['x-access-token'];
+
+		var token;
+		console.log(req.cookies.connect_auth);
+		if(req.cookies.connect_auth){
+			token = req.cookies.connect_auth;
+		}
+		else{
+			token = req.body.token || req.query.token || req.headers['x-access-token'];
+		}
 		if (token) {
 			jwt.verify(token,superSecret, function(err, decoded) {      
 			  if (err) {
@@ -116,6 +124,7 @@ module.exports=function(app,express){
 			});
 		} else {
 			var loggedOnUser = false;
+			next();
 			// res.status(403).send({ 
 			//     success: false, 
 			//     message: 'No token provided.' 

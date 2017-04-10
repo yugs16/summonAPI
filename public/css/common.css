@@ -54,12 +54,16 @@ body {
 .sideMenuListItems {
 	margin: 2px;
 	list-style: none;
+	padding: 8px;
 }
 .sideMenuListItems a {
 	color: #424242 !important;
-	font-size: 0.8em;
+	font-size: 1em;
 	font-weight: bold;
 	text-decoration: none !important;
+}
+.menuIcons svg {
+	vertical-align: text-bottom;
 }
 .hiddensideNav {
 	overflow: hidden;

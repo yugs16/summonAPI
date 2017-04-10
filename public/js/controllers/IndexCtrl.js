@@ -1,9 +1,18 @@
  angular.module('IndexCtrl',[])
 	
-	.controller('indexCtrl', ['$scope', '$mdDialog', 'signupService', 'signinService', '$location', function($scope, $mdDialog, $location, signupService, signinService) {
+	.controller('indexCtrl', ['$scope', '$mdDialog', 'userDataService', '$location', function($scope, $mdDialog, $location, userDataService) {
+		
+		if (true) {
+			userDataService.getData()
+				.success(function(resp) {
+					console.log(resp);
+				})
+				.error(function(err) {
+					console.log(err);
+				})
+		}
 
 		$scope.loginDialog = function(ev) {
-
 			$mdDialog.show({
 				controller : loginDialogController,
 				templateUrl: '../views/signupDialog.html',

@@ -1,6 +1,7 @@
 angular.module('loginCtrl', [])
 
 	.controller('loginCtrl', ['$scope', '$location', 'signinService', function($scope, $location, signinService) {
+
 		$scope.loginAccount = function(){
 			var data = {
 				"username" : $scope.user.username,

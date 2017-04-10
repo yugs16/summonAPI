@@ -4,7 +4,8 @@ var app = express(),
 	config=require('./config'),
 	mongoose=require('mongoose');
 	bodyParser=require('body-parser'),
-	morgan   = require('morgan');
+	morgan   = require('morgan'),
+	cookieParser = require('cookie-parser');
 
 // app.use(express.static(__dirname + '/public'));
 
@@ -27,6 +28,7 @@ mongoose.connect(config.database,function(err){
 // config.path = __dirname;
 // app.set(config.path);
 
+app.use(cookieParser());
 app.use(bodyParser.urlencoded({
 	extended: true
 }));
