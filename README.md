@@ -10,6 +10,6 @@ Based on modern world web MeanJS ( AngularJS, NodeJS, ExpressJS, MongoDB).
 Clone the repository and enter the following commands in the terminal- 
 ####    
     cd summonAPI
-    npm install
+    npm install   (this will install the package.json)
 
  
