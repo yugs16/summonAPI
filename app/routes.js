@@ -195,5 +195,17 @@ module.exports=function(app,express){
 			});
 		}
 	});
+
+	api.post('/addPost',function(req,res){
+		if(req.loggedOnUser){
+
+		}
+		else{
+			res.json({
+				'redirectUrl':'/login',
+				'loggedOnUser':false
+			})
+		}
+	})
   return api ;
 }
