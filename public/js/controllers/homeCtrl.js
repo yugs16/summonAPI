@@ -1,11 +1,12 @@
 angular.module('homeCtrl', [])
 
-	.controller('homeCtrl', ['$scope', '$mdDialog', '$location', 'userDataService', function($scope, $mdDialog, $location, userDataService) {
-		
+	.controller('homeCtrl', ['$scope', '$mdDialog', '$location', '$window', '$cookies', 'userDataService', function($scope, $mdDialog, $location, $window, $cookies, userDataService) {
+
 		if (true) {
 
 			userDataService.getData()
 				.success(function(resp) {
+					$scope.userData = resp;
 					console.log(resp);
 				})
 				.error(function(err) {
@@ -39,4 +40,9 @@ angular.module('homeCtrl', [])
 				$mdDialog.hide();
 			}
 		};
+
+		$scope.logout = function() {
+			$scope.userData.loggedOnUser = false;
+			// $window.location.href = '/';
+		}
 	}])

@@ -1,6 +1,6 @@
 angular.module('loginCtrl', [])
 
-	.controller('loginCtrl', ['$scope', '$location', 'signinService', function($scope, $location, signinService) {
+	.controller('loginCtrl', ['$scope', '$location', 'signinService', '$window', '$route', function($scope, $location, signinService, $window, $route) {
 
 		$scope.loginAccount = function(){
 			var data = {
@@ -10,7 +10,9 @@ angular.module('loginCtrl', [])
 			signinService.userSignin(data)
 				.success(function(data, status, headers, config) {
 					console.log(data);
-					$location.path('/home');
+					console.log('in loginCtrl');
+					$window.location.href = '/';
+					// $location.path('/');
 				})
 				.error(function(err) {
 					console.log(err);
