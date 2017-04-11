@@ -5,7 +5,10 @@ var mongoose = require('mongoose');
 var user=new mongoose.Schema({
 	username:{type:'String',default:''},
 	email:{type:'String',default:''},
-	password:{type:'String',default:''}
+	password:{type:'String',default:''},
+	post_cnt:{type:'Number',default:0},
+	posts:['String'],
+	user_rating:{type:"Number",default:1}
 },{collection: 'users' });
 
 module.exports = mongoose.model('User',user);

@@ -1,4 +1,5 @@
-var User = require('./models/user');
+var User = require('./models/user'),
+	Post = require('./models/post');
 var config=require('../config'), 
 	jwt=require('jsonwebtoken'),
 	autho = require("node-autho");	
@@ -40,7 +41,8 @@ module.exports=function(app,express){
 
 					var token = jwt.sign({
 						username:user.username,
-						email:user.email
+						email:user.email,
+						userId:user._id
 					}, superSecret,{ expiresIn:'1h'});
 
 					res.cookie('connect_auth', token, {  
@@ -121,14 +123,27 @@ module.exports=function(app,express){
 			  if (err) {
 			    return res.json({ success: false, message: 'Failed to authenticate token.' });    
 			  } else {
-			    // if everything is good, save to request for use in other routes
-			   	req.loggedOnUser =true;
-			   	console.log(decoded);
-			   	req.body.decoded = decoded;  
-			   	// console.log(decoded._doc);
-			   	req.token = token; 
-			    next();
-			  }
+				    // if everything is good, save to request for use in other routes
+				   	req.loggedOnUser =true;
+				   	console.log(decoded);
+				   	req.body.decoded = decoded;  
+				   	// console.log(decoded._doc);
+				   	req.token = token; 
+				   	User.findOne({ 
+				   		_id:req.body.decoded.userId,
+				   		email:req.body.decoded.email
+				   	},function(err,user){
+				   		if(user){
+				   			next()
+				   		}
+				   		else{
+				   			res.status(404).json({
+				   				"success":false,
+				   				"msg":"Not Our User"
+				   			});
+				   		}
+				   	})
+				}
 			});
 		} else {
 			req.loggedOnUser = false;
@@ -154,7 +169,6 @@ module.exports=function(app,express){
 	});
 
 
-
 	api.get('/users',function(req,res){
 		console.log("in routesjs /users");
 		console.log(req.body);
@@ -177,7 +191,7 @@ module.exports=function(app,express){
 				token:req.token,
 				loggedOnUser:true
 			};
-			console.log(req.body);
+			//console.log(req.body);
 			res.status(200).json(data);
 		}
 		else{
@@ -199,14 +213,55 @@ module.exports=function(app,express){
 
 	api.post('/addPost',function(req,res){
 		if(req.loggedOnUser){
-
+			console.log("add post");
+			//console.log(req.body.decoded);
+			User.findOne({
+					_id:req.body.decoded.userId,
+					email:req.body.decoded.email	
+			}).exec(function(err,user){
+				//console.log(user);
+				if(err) throw err;
+				if(user){
+					//console.log(req.body);
+					var post = new Post(req.body);
+					post.userId = user._id;
+					post.rating = 0;
+					post.createdAt = Date.now();
+					post.save(function(err,instance){
+						//console.log(instance);
+						if(instance){
+							console.log("Inserted");
+							console.log(user.post_cnt);
+							var cnt= user.post_cnt+1;
+							var update = {'post_cnt':cnt,$push:{'posts.to':instance._id}};
+							user.update({'post_cnt':cnt,$push:{'posts':instance._id}},function(err,user){
+								console.log("updated");
+								res.status(200).json({
+									status:200,
+									status_info:"success",
+									msg:"Post Insterted successfully"
+								})
+							})
+						}else{
+							console.log("Problem");
+							res.status(200).json({
+								status:400,
+								status_info:"error",
+								msg:"Post Instertion failed"
+							})
+						}
+					})
+				}
+			});
 		}
 		else{
+			// res.redirect(304,'/login');
 			res.json({
 				'redirectUrl':'/login',
 				'loggedOnUser':false
 			})
 		}
 	})
+
   return api ;
 }

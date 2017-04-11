@@ -48,10 +48,11 @@ app.set('views', __dirname + '/public/views');
 app.use('/js',express.static(__dirname + '/public'));
 
 
-app.get('*`',function(req,res){
+app.get('*',function(req,res){
 		
   	console.log("**came");
-  	res.json({});
+  	// res.json({});
+   res.redirect('/');
    // res.sendFile(__dirname +'/public/index.html'); 
 });
 
