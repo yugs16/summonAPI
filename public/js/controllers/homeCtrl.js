@@ -2,8 +2,7 @@ angular.module('homeCtrl', [])
 
 	.controller('homeCtrl', ['$scope', '$mdDialog', '$location', '$window', '$cookies', 'userDataService', function($scope, $mdDialog, $location, $window, $cookies, userDataService) {
 
-		if (true) {
-
+		if ($cookies.get('connect_auth')) {
 			userDataService.getData()
 				.success(function(resp) {
 					$scope.userData = resp;
@@ -43,6 +42,7 @@ angular.module('homeCtrl', [])
 
 		$scope.logout = function() {
 			$scope.userData.loggedOnUser = false;
-			// $window.location.href = '/';
+			$cookies.remove('connect_auth');
+			$window.location.href = '/';
 		}
 	}])
