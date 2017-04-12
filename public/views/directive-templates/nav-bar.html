@@ -11,8 +11,8 @@
     	</ng-md-icon>
         <span class="brand">Summon<strong>API</strong></span><div flex></div>
         <md-button class="signupButton" ng-click="loginDialog($event)" ng-if="!userData.loggedOnUser" hide-xs>Login</md-button>
-        <span class="signupButton" ng-click="null" ng-if="userData.loggedOnUser">{{userData.username}}</span>
-        <md-menu ng-if="userData.loggedOnUser" md-position-mode="target-right bottom">
+        <span class="signupButton" ng-click="null" ng-if="userData.loggedOnUser" hide-xs>{{userData.username}}</span>
+        <md-menu ng-if="userData.loggedOnUser" md-position-mode="target-right bottom" hide-xs>
             <a href="#" class="userImg">
                 &nbsp;
                 <img class="userProfileImg" ng-click="$mdOpenMenu($event)" src="../../images/img1.jpg" height="30px" width="30px">

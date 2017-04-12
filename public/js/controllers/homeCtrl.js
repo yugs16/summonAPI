@@ -1,16 +1,19 @@
 angular.module('homeCtrl', [])
 
-	.controller('homeCtrl', ['$scope', '$mdDialog', '$location', '$window', '$cookies', 'userDataService', function($scope, $mdDialog, $location, $window, $cookies, userDataService) {
+	.controller('homeCtrl', ['$scope', '$rootScope', '$mdDialog', '$location', '$window', '$cookies', 'userDataService', function($scope, $rootScope, $mdDialog, $location, $window, $cookies, userDataService) {
 
 		if ($cookies.get('connect_auth')) {
+			console.log('user data : ');
 			userDataService.getData()
 				.success(function(resp) {
-					$scope.userData = resp;
+					$rootScope.userData = resp;
 					console.log(resp);
 				})
 				.error(function(err) {
 					console.log(err);
 				})
+		}else{
+			console.log('trending data');
 		}
 
 

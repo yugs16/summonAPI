@@ -75,6 +75,20 @@ body {
 	background: #E0E0E0;
 	min-height: 100%;
 }
+.hiddensideNavMenuIcon {
+	position: absolute;
+    bottom: 0;
+    right: 3px;
+}
+.hiddensideNavMenuIcon:hover {
+	cursor: pointer;
+}
+.hiddensideNavMenuUserEmail {
+	font-size: xx-small;
+    position: absolute;
+    bottom: 13px;
+    right: 35px;
+}
 .sideToolbar {
 	min-height: 6.4em;
 }

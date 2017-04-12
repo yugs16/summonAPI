@@ -10,8 +10,11 @@ angular.module('loginCtrl', [])
 			signinService.userSignin(data)
 				.success(function(data, status, headers, config) {
 					console.log(data);
-					console.log('in loginCtrl');
-					$window.location.href = '/';
+					if (data.success === false) {
+						alert(data.message);
+					} else {
+						$window.location.href = '/';
+					}
 					// $location.path('/');
 				})
 				.error(function(err) {
