@@ -4,9 +4,9 @@ angular.module('hiddensideNavCtrl', [])
 
 		$rootScope.userData;
 
-		$scope.loginDialog = function() {
-            $rootScope.$emit("loginDialog", {});
-        }
+		// $scope.loginDialog = function() {
+  //           $rootScope.$emit("loginDialog", {});
+  //       }
 
 		// implement routing....
 		// redirect to /home

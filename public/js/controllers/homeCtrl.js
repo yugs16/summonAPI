@@ -2,9 +2,9 @@ angular.module('homeCtrl', [])
 
 	.controller('homeCtrl', ['$scope', '$rootScope', '$mdDialog', '$location', '$window', '$cookies', 'userDataService', function($scope, $rootScope, $mdDialog, $location, $window, $cookies, userDataService) {
 
-		$rootScope.$on("loginDialog", function(){
-           $scope.loginDialog();
-        });
+		// $rootScope.$on("loginDialog", function(){
+  //          $scope.loginDialog();
+  //       });
 
 		if ($cookies.get('connect_auth')) {
 			console.log('user data : ');
