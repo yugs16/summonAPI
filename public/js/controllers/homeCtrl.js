@@ -1,17 +1,17 @@
 angular.module('homeCtrl', [])
 
-	.controller('homeCtrl', ['$scope', '$rootScope', '$mdDialog', '$location', '$window', '$cookies', 'userDataService', function($scope, $rootScope, $mdDialog, $location, $window, $cookies, userDataService) {
+	.controller('homeCtrl', ['$scope', '$rootScope', '$mdDialog', '$location', '$window', '$cookies', '$mdSidenav', 'userDataService', function($scope, $rootScope, $mdDialog, $location, $window, $cookies, $mdSidenav, userDataService) {
 
 		// $rootScope.$on("loginDialog", function(){
   //          $scope.loginDialog();
   //       });
-  
 		if ($cookies.get('connect_auth')) {
 			console.log('user data : ');
 			userDataService.getData()
 				.then(function(resp) {
 					$rootScope.userData = resp;
-					console.log($rootScope.userData);
+					$rootScope.$broadcast('senddown', resp.data);
+					console.log(resp);
 				}, function errorCallback(err) {
 					console.log(err);
 				});
@@ -20,12 +20,12 @@ angular.module('homeCtrl', [])
 			userDataService.getData()
 				.then(function(resp) {
 					$rootScope.trendingData = resp;
+					$rootScope.$broadcast('senddown', resp.data);
 					console.log($rootScope.trendingData);
 				}, function errorCallback(err) {
 					console.log(err);
 				});
 		}
-
 
 		$scope.loginDialog = function(ev) {
 			$mdDialog.show({
@@ -50,6 +50,7 @@ angular.module('homeCtrl', [])
 			$scope.closeLoginDialog = function() {
 				$location.path('/login-account');
 				$mdDialog.hide();
+				$mdSidenav('hiddenNavBar').close();
 			}
 		};
 

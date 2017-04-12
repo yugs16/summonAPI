@@ -6,9 +6,9 @@
 	    flex="100"
 	    >
 		<md-toolbar class="md-theme-indigo sideToolbar">
-			<h1 class="md-toolbar-tools" ng-if="!userData.loggedOnUser">Menu</h1>
+			<h1 class="md-toolbar-tools" ng-if="!data.loggedOnUser">Menu</h1>
 
-			<md-menu md-position-mode="target-right bottom" ng-if="!userData.loggedOnUser">
+			<md-menu md-position-mode="target-right bottom" ng-if="!data.loggedOnUser">
 				<ng-md-icon class="hiddensideNavMenuIcon" ng-click="$mdMenu.open($event)" icon="arrow_drop_down" style="fill: white" size="26"></ng-md-icon>
 				<md-menu-content width="3" >
 	                <md-menu-item>
@@ -19,9 +19,9 @@
             	</md-menu-content>
 			</md-menu>
 
-			<h1 class="md-toolbar-tools" ng-if="userData.loggedOnUser">{{userData.username}}</h1>			
-			<span class="hiddensideNavMenuUserEmail">{{userData.email}}</span>
-			<md-menu md-position-mode="target-right bottom" ng-if="userData.loggedOnUser">
+			<h1 class="md-toolbar-tools" ng-if="data.loggedOnUser">{{data.username}}</h1>			
+			<span class="hiddensideNavMenuUserEmail">{{data.email}}</span>
+			<md-menu md-position-mode="target-right bottom" ng-if="data.loggedOnUser">
 				<ng-md-icon class="hiddensideNavMenuIcon" ng-click="$mdMenu.open($event)" icon="arrow_drop_down" style="fill: white" size="26"></ng-md-icon>
 				<md-menu-content width="3" >
 	                <md-menu-item>
