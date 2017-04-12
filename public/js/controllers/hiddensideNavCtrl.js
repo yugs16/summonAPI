@@ -3,6 +3,7 @@ angular.module('hiddensideNavCtrl', [])
 	.controller('hiddensideNavCtrl', ['$scope', '$rootScope', '$controller', '$location', '$mdSidenav', '$mdDialog', '$cookies', '$window', function($scope, $rootScope, $controller, $location, $mdSidenav, $mdDialog, $cookies, $window) {
 
 		$rootScope.userData;
+		console.log($rootScope.userData);
 
 		// $scope.loginDialog = function() {
   //           $rootScope.$emit("loginDialog", {});

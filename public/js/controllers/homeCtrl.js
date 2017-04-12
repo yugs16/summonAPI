@@ -5,19 +5,25 @@ angular.module('homeCtrl', [])
 		// $rootScope.$on("loginDialog", function(){
   //          $scope.loginDialog();
   //       });
-
+  
 		if ($cookies.get('connect_auth')) {
 			console.log('user data : ');
 			userDataService.getData()
-				.success(function(resp) {
+				.then(function(resp) {
 					$rootScope.userData = resp;
-					console.log(resp);
-				})
-				.error(function(err) {
+					console.log($rootScope.userData);
+				}, function errorCallback(err) {
 					console.log(err);
-				})
+				});
 		}else{
 			console.log('trending data');
+			userDataService.getData()
+				.then(function(resp) {
+					$rootScope.trendingData = resp;
+					console.log($rootScope.trendingData);
+				}, function errorCallback(err) {
+					console.log(err);
+				});
 		}
 
 
@@ -48,7 +54,6 @@ angular.module('homeCtrl', [])
 		};
 
 		$scope.logout = function() {
-			$scope.userData.loggedOnUser = false;
 			$cookies.remove('connect_auth');
 			$window.location.href = '/';
 		}

@@ -11,11 +11,10 @@ angular.module('createAccountCtrl', [])
 					alert('Please fill all fields');
 				}else{
 					signupService.userSignup(data)
-						.success(function(data, status, headers, config) {
+						.then(function(data, status, headers, config) {
 							console.log(data);
 							$location.path('/login-account');
-						}).error(function(err) {
-							console.log('error occured:' + err);
+						}, function errorCallback(err) {
 							console.log(err);
 						})
 				}

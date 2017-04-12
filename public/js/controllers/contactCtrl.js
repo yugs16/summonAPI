@@ -1,5 +1,5 @@
 angular.module('contactCtrl', [])
 
-	.controller('contactCtrl', ['$scope', '$location', function($scope, $location) {
-		
+	.controller('contactCtrl', ['$scope', '$rootScope', '$location', function($scope, $rootScope, $location) {
+		console.log($rootScope.userData);
 	}])

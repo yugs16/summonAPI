@@ -8,7 +8,7 @@ angular.module('loginCtrl', [])
 				"password" : $scope.user.password 
 			};
 			signinService.userSignin(data)
-				.success(function(data, status, headers, config) {
+				.then(function(data, status, headers, config) {
 					console.log(data);
 					if (data.success === false) {
 						alert(data.message);
@@ -16,8 +16,7 @@ angular.module('loginCtrl', [])
 						$window.location.href = '/';
 					}
 					// $location.path('/');
-				})
-				.error(function(err) {
+				}, function errorCallback(err) {
 					console.log(err);
 				})
 		}		
