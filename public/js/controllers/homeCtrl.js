@@ -9,7 +9,7 @@ angular.module('homeCtrl', [])
 			console.log('user data : ');
 			userDataService.getData()
 				.then(function(resp) {
-					$rootScope.userData = resp;
+					$rootScope.userData = resp.data;
 					$rootScope.$broadcast('senddown', resp.data);
 					console.log(resp);
 				}, function errorCallback(err) {
@@ -19,7 +19,7 @@ angular.module('homeCtrl', [])
 			console.log('trending data');
 			userDataService.getData()
 				.then(function(resp) {
-					$rootScope.trendingData = resp;
+					$rootScope.trendingData = resp.data;
 					$rootScope.$broadcast('senddown', resp.data);
 					console.log($rootScope.trendingData);
 				}, function errorCallback(err) {
