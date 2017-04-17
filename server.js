@@ -52,8 +52,8 @@ app.get('*',function(req,res){
 		
   	console.log("**came");
   	// res.json({});
-   res.redirect('/');
-   // res.sendFile(__dirname +'/public/index.html'); 
+   	res.redirect('/');
+   	// res.sendFile(__dirname +'/public/index.html'); 
 });
 
 // app.get('/', function (req, res) {

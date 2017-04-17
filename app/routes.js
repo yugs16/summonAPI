@@ -185,29 +185,65 @@ module.exports=function(app,express){
 		
 		if(req.loggedOnUser){
 			console.log("in routesjs /users");
-			var data = {
+			var i=0;
+			var dataToSend = {
 				username:req.body.decoded.username,
 				email:req.body.decoded.email,
-				token:req.token,
-				loggedOnUser:true
+				loggedOnUser:true,
+				posts:[]
 			};
+			Post.find({userId:req.body.decoded.userId},function(err,posts){
+				if(posts === null || posts.length === 0){
+					res.status.json(dataToSend);
+				}
+				else{
+					posts.forEach(function(onePost){
+						User.findOne({ _id:onePost.userId},function(err,instance){
+							var r = onePost.toObject();
+							r.userInfo = instance;
+							dataToSend.posts.push(r);
+							i++;
+							if(posts.length === i){
+								res.status(200).json(dataToSend);
+							}
+						})
+					})	
+				}	
+			})
 			//console.log(req.body);
-			res.status(200).json(data);
 		}
 		else{
-			// var data = [
-			// 	{
-			// 		title:
-
-			// 	},{
-
-			// 	}
-			// ]
-
-			res.status(200).json({
+			console.log("Came in /me else");
+			var i=0;
+			var dataToSend={
 				trending:true,
-				loggedOnUser:false
-			});
+				loggedOnUser:false,
+				posts:[]
+			};
+			Post.find({haveTrendingAccess:true},function(err,posts){
+				console.log(posts);
+				console.log("ok");
+				//dataToSend = posts;
+				if(posts === null || posts.length === 0){
+					console.log("came in null");
+					res.status(200).json(dataToSend);
+				}
+				else{
+					console.log("came in else again");
+					posts.forEach(function(onePost){
+						User.findOne({ _id:onePost.userId},function(err,instance){
+							var r = onePost.toObject();
+							r.userInfo = instance;
+							dataToSend.posts.push(r);
+							i++;
+							if(posts.length === i){
+								res.status(200).json(dataToSend);
+							}
+						})
+					})					
+				}
+
+			});	
 		}
 	});
 
@@ -225,7 +261,6 @@ module.exports=function(app,express){
 					//console.log(req.body);
 					var post = new Post(req.body);
 					post.userId = user._id;
-					post.rating = 0;
 					post.createdAt = Date.now();
 					post.save(function(err,instance){
 						//console.log(instance);

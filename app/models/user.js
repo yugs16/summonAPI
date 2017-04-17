@@ -8,7 +8,16 @@ var user=new mongoose.Schema({
 	password:{type:'String',default:''},
 	post_cnt:{type:'Number',default:0},
 	posts:['String'],
-	user_rating:{type:"Number",default:1}
+	user_rating:{type:"Number",default:1},
+	git_account:{
+		git_id:"String",
+		git_link:"String",
+		git_username:"String",
+		git_repo:[{
+			repo_name:{type:"String"},
+			repo_link:{type:"String"}
+		}]
+	},
 },{collection: 'users' });
 
 module.exports = mongoose.model('User',user);
