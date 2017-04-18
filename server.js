@@ -22,8 +22,8 @@ mongoose.connect(config.database,function(err){
 		console.log('Connected to the database');
 	}
 });
-// app.set('superSecret', config.secret); 
-// require('./app/routes')(app); 
+// app.set('superSecret', config.secret);
+// require('./app/routes')(app);
 
 // config.path = __dirname;
 // app.set(config.path);
@@ -32,7 +32,7 @@ app.use(cookieParser());
 app.use(bodyParser.urlencoded({
 	extended: true
 }));
-app.use(bodyParser.json()); // parse application/json 
+app.use(bodyParser.json()); // parse application/json
 
 // app.use(bodyParser.json({ type: 'json/vnd.api+json' })); // parse application/vnd.api+json as json
 
@@ -49,11 +49,11 @@ app.use('/js',express.static(__dirname + '/public'));
 
 
 app.get('*',function(req,res){
-		
+
   	console.log("**came");
   	// res.json({});
    res.redirect('/');
-   // res.sendFile(__dirname +'/public/index.html'); 
+   // res.sendFile(__dirname +'/public/index.html');
 });
 
 // app.get('/', function (req, res) {
