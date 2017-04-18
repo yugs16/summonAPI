@@ -84,7 +84,7 @@ body {
 	cursor: pointer;
 }
 .hiddensideNavMenuUserEmail {
-	font-size: xx-small;
+	font-size: small;
     position: absolute;
     bottom: 13px;
     right: 35px;

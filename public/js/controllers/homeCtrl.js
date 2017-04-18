@@ -1,25 +1,31 @@
 angular.module('homeCtrl', [])
 
-	.controller('homeCtrl', ['$scope', '$rootScope', '$mdDialog', '$location', '$window', '$cookies', 'userDataService', function($scope, $rootScope, $mdDialog, $location, $window, $cookies, userDataService) {
+	.controller('homeCtrl', ['$scope', '$rootScope', '$mdDialog', '$location', '$window', '$cookies', '$mdSidenav', 'userDataService', function($scope, $rootScope, $mdDialog, $location, $window, $cookies, $mdSidenav, userDataService) {
 
-		$rootScope.$on("loginDialog", function(){
-           $scope.loginDialog();
-        });
-
+		// $rootScope.$on("loginDialog", function(){
+  //          $scope.loginDialog();
+  //       });
 		if ($cookies.get('connect_auth')) {
 			console.log('user data : ');
 			userDataService.getData()
-				.success(function(resp) {
-					$rootScope.userData = resp;
+				.then(function(resp) {
+					$rootScope.userData = resp.data;
+					$rootScope.$broadcast('senddown', resp.data);
 					console.log(resp);
-				})
-				.error(function(err) {
+				}, function errorCallback(err) {
 					console.log(err);
-				})
+				});
 		}else{
 			console.log('trending data');
+			userDataService.getData()
+				.then(function(resp) {
+					$rootScope.trendingData = resp.data;
+					$rootScope.$broadcast('senddown', resp.data);
+					console.log($rootScope.trendingData);
+				}, function errorCallback(err) {
+					console.log(err);
+				});
 		}
-
 
 		$scope.loginDialog = function(ev) {
 			$mdDialog.show({
@@ -44,11 +50,11 @@ angular.module('homeCtrl', [])
 			$scope.closeLoginDialog = function() {
 				$location.path('/login-account');
 				$mdDialog.hide();
+				$mdSidenav('hiddenNavBar').close();
 			}
 		};
 
 		$scope.logout = function() {
-			$scope.userData.loggedOnUser = false;
 			$cookies.remove('connect_auth');
 			$window.location.href = '/';
 		}

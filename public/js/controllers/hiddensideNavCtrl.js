@@ -1,12 +1,15 @@
 angular.module('hiddensideNavCtrl', [])
 
-	.controller('hiddensideNavCtrl', ['$scope', '$rootScope', '$controller', '$location', '$mdSidenav', '$mdDialog', '$cookies', '$window', function($scope, $rootScope, $controller, $location, $mdSidenav, $mdDialog, $cookies, $window) {
+	.controller('hiddensideNavCtrl', ['$scope', '$rootScope', '$location', '$mdSidenav', '$mdDialog', '$cookies', '$window', function($scope, $rootScope, $location, $mdSidenav, $mdDialog, $cookies, $window) {
 
-		$rootScope.userData;
+		$scope.$on('senddown', function(evt, resp) {
+			$scope.data = resp;
+			console.log($scope.data);
+		});
 
-		$scope.loginDialog = function() {
-            $rootScope.$emit("loginDialog", {});
-        }
+		// $scope.loginDialog = function() {
+  //           $rootScope.$emit("loginDialog", {});
+  //       }
 
 		// implement routing....
 		// redirect to /home

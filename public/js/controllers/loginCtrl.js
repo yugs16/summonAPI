@@ -8,16 +8,14 @@ angular.module('loginCtrl', [])
 				"password" : $scope.user.password 
 			};
 			signinService.userSignin(data)
-				.success(function(data, status, headers, config) {
-					console.log(data);
-					if (data.success === false) {
-						alert(data.message);
+				.then(function(resp, status, headers, config) {
+					if (resp.data.success === false) {
+						alert(resp.data.message);
 					} else {
 						$window.location.href = '/';
 					}
 					// $location.path('/');
-				})
-				.error(function(err) {
+				}, function errorCallback(err) {
 					console.log(err);
 				})
 		}		

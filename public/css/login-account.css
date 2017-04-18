@@ -1,7 +1,8 @@
 .loginAccountCard {
-	width: 60%;
-    height: auto;
+	background: rgb(250, 250, 250);
     border-radius: 0px;
+    height: auto;
     margin: auto;
     margin-top: 1em;
+	width: 60%;
 }
