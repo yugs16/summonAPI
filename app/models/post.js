@@ -11,16 +11,16 @@ var post=new mongoose.Schema({
 	public_post:{type:'boolean'},
 	private_post:{type:'boolean'},
 	code_file:"String",
-	git_account:{
-		git_id:"String",
-		git_username:"String",
-		git_repo:["String"]
-	},
+	git_link:"String",
+	views:{type:"Number",default:0},
 	vote_cnt:{type:"Number",default:0},
 	votes:[{
-		vote_type:"Number",              //its user raitng... 4 star user 3star user.
-		vote:'boolean'
+		vote_type:{type:"Number",default:1},              //its user raitng... 4 star user 3star user.
+		vote:{type:"boolean"},
+		userId:{type:"String"},
+		_id:false
 	}],
+	haveTrendingAccess:{type:"boolean",default:false},
 	tags:["String"],
 	createdAt:{type:'date',default:Date.now}
 },{collection: 'posts'});
