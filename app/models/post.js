@@ -16,8 +16,9 @@ var post=new mongoose.Schema({
 	vote_cnt:{type:"Number",default:0},
 	votes:[{
 		vote_type:{type:"Number",default:1},              //its user raitng... 4 star user 3star user.
-		vote:{type:"boolean",default:false},
-		userId:{type:"String",required:true}
+		vote:{type:"boolean"},
+		userId:{type:"String"},
+		_id:false
 	}],
 	haveTrendingAccess:{type:"boolean",default:false},
 	tags:["String"],
