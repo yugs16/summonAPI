@@ -16,6 +16,7 @@ angular.module('createAccountCtrl', [])
 							$location.path('/login-account');
 						}, function errorCallback(err) {
 							console.log(err);
+							alert(err.data.msg);
 						})
 				}
 		}
