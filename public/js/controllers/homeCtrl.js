@@ -2,9 +2,6 @@ angular.module('homeCtrl', [])
 
 	.controller('homeCtrl', ['$scope', '$rootScope', '$mdDialog', '$location', '$window', '$cookies', '$mdSidenav', 'userDataService', function($scope, $rootScope, $mdDialog, $location, $window, $cookies, $mdSidenav, userDataService) {
 
-		// $rootScope.$on("loginDialog", function(){
-  //          $scope.loginDialog();
-  //       });
 		if ($cookies.get('connect_auth')) {
 			console.log('user data : ');
 			userDataService.getData()
@@ -19,9 +16,10 @@ angular.module('homeCtrl', [])
 			console.log('trending data');
 			userDataService.getData()
 				.then(function(resp) {
-					$rootScope.trendingData = resp.data;
+					$scope.trendingData = resp.data;
+					$scope.posts = $scope.trendingData.posts[0];
 					$rootScope.$broadcast('senddown', resp.data);
-					console.log($rootScope.trendingData);
+					console.log($scope.trendingData);
 				}, function errorCallback(err) {
 					console.log(err);
 				});
