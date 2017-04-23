@@ -33,11 +33,11 @@ hr {
 	object-fit: cover;
 }
 .intro_card_content {
-	background-color: rgb(250, 250, 250);	
+	background-color: rgb(250, 250, 250);
 	padding: 10px;
 }
 .post_title, .post_author, .post_desc {
-	margin: 5px 0 5px 0; 
+	margin: 5px 0 5px 0;
 	font-family: sans-serif;
 }
 .post_title, .post_title:hover {
@@ -51,7 +51,7 @@ hr {
 	cursor: pointer;
 	font-size: 15px;
     font-weight: bolder;
-    color: orange; 
+    color: orange;
 }
 .api_link {
 	font-size: 10px;
@@ -67,11 +67,17 @@ hr {
 	color: grey;
 	font-size: small;
 }
+.voteContainer {
+	padding: 5px 5px 5px 5px;
+}
+.voteContainer ng-md-icon, .voteContainer ng-md-icon:hover{
+	cursor: pointer;
+	vertical-align: -webkit-baseline-middle;
+}
 
 
 /*toolbar styling*/
 .toolbar {
-	background: #3F51B5 !important;
 	color: white;
 	min-height: 100px;
 }
@@ -139,6 +145,7 @@ hr {
     right: 35px;
 }
 .sideToolbar {
+	background-image: url('../images/sidenavImg.jpg');
 	min-height: 6.4em;
 }
 
