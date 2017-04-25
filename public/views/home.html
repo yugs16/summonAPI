@@ -1,4 +1,5 @@
 <section>
+	<!--intro card-->
 	<md-card class="intro_card">
 		<img src="../images/homeImg.png">
 		<md-card-title class="card_title">
@@ -7,6 +8,8 @@
 			</md-card-title-text>
 		</md-card-title>
 	</md-card>		
+
+	<!--info card-->
 	<md-card class="info_card" ng-repeat="i in trendingData.posts">
 		<md-card-header>
 			<md-card-avatar>
@@ -45,32 +48,4 @@
 			</div>
 		</md-card-actions>
 	</md-card>
-			<!--<md-content class="posts" ng-repeat="i in trendingData.posts">
-				<h3 class="post_title">
-					{{i.title}}
-				</h3>
-				<h6 class="post_author">
-					{{i.userInfo.username}}
-				</h6>
-				<div class="post_tags">
-					<span ng-repeat="tags in i.tags">
-						{{tags}}
-					</span>
-				</div>
-				<a href="{{i.api_link}}" class="api_link" target="_blank">API LINK</a>
-				<span class="post_time">
-					{{i.createdAt}}
-				</span>
-				<p class="post_desc">
-					{{i.description}}
-				</p>
-				<div class="voteContainer">
-					<ng-md-icon ng-click="null" icon="thumb_up" style="fill: grey" size="17"></ng-md-icon>
-					<span>count</span>
-					&nbsp;
-					<ng-md-icon ng-click="null" icon="thumb_down" style="fill: grey" size="17"></ng-md-icon>
-					<span>count</span>
-				</div>
-			</md-content>
-			<hr />-->
 </section>
