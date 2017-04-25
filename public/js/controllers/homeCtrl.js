@@ -19,6 +19,7 @@
 					.then(function(resp) {
 						$scope.trendingData = resp.data;
 						$scope.posts = $scope.trendingData.posts[0];
+						console.log($scope.tags = resp.data.posts[0].tags);
 						$rootScope.$broadcast('senddown', resp.data);
 						console.log($scope.trendingData);
 					}, function errorCallback(err) {

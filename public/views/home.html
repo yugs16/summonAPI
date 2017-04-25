@@ -6,8 +6,46 @@
 				<span class="md-headline">Home</span><br>
 			</md-card-title-text>
 		</md-card-title>
-		<md-card-content class="intro_card_content">
-			<md-content class="posts" ng-repeat="i in trendingData.posts">
+	</md-card>		
+	<md-card class="info_card" ng-repeat="i in trendingData.posts">
+		<md-card-header>
+			<md-card-avatar>
+				<img src="../images/aboutImg.png" class="userImg" />
+			</md-card-avatar>
+			<md-card-header-text>
+				<span class="md-title">{{i.userInfo.username}}</span>
+				<span class="md-subhead">{{i.createdAt}}</span>
+			</md-card-header-text>
+		</md-card-header>
+		<md-card-title>
+			<md-card-title-text>
+			<span class="md-headline">{{i.title}}</span>
+			<span class="md-subhead">
+				<a href="{{i.api_link}}" class="api_link" target="_blank">API LINK</a>
+			</span>
+			</md-card-title-text>
+		</md-card-title>
+		<md-card-content>
+			<p>
+				{{i.description}}
+			</p>
+			<div class="chip_box">
+				<span class="chip" ng-repeat="tags in i.tags">
+					{{tags}}
+				</span>
+			</div>
+		</md-card-content>
+		<md-card-actions layout="row" layout-align="start center">
+			<div class="voteContainer">
+				<ng-md-icon ng-click="null" icon="thumb_up" style="fill: grey" size="17"></ng-md-icon>
+				<span>count</span>
+				&nbsp;
+				<ng-md-icon ng-click="null" icon="thumb_down" style="fill: grey" size="17"></ng-md-icon>
+				<span>count</span>
+			</div>
+		</md-card-actions>
+	</md-card>
+			<!--<md-content class="posts" ng-repeat="i in trendingData.posts">
 				<h3 class="post_title">
 					{{i.title}}
 				</h3>
@@ -34,7 +72,5 @@
 					<span>count</span>
 				</div>
 			</md-content>
-			<hr />
-		</md-card-content>
-	</md-card>
+			<hr />-->
 </section>
