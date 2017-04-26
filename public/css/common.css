@@ -55,16 +55,16 @@ hr {
 .post_author {
 	font-weight: lighter;
 }
-.chip_box, .chip_box:hover {
-	cursor: pointer;
+.chip_box {
 	flex-wrap: wrap; 
 	display: flex;
 	margin-left: 1em;
     margin-right: 1em;
     padding: 0.5em;
 }
-.chip {
+.chip, chip:hover {
 	color: white;
+	cursor: pointer;
 	font-family: Roboto,"Helvetica Neue",sans-serif;
 	list-style: none;
 	display: inline-block;

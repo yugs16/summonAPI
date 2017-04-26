@@ -3,11 +3,13 @@
 	angular.module('homeCtrl', [])
 		.controller('homeCtrl', ['$scope', '$rootScope', '$mdDialog', '$location', '$window', '$cookies', '$mdSidenav', 'userDataService', function($scope, $rootScope, $mdDialog, $location, $window, $cookies, $mdSidenav, userDataService) {
 
+			// sending get request to server if user is logged in
 			if ($cookies.get('connect_auth')) {
 				console.log('user data : ');
 				userDataService.getData()
 					.then(function(resp) {
 						$rootScope.userData = resp.data;
+						//data sharing among controllers 
 						$rootScope.$broadcast('senddown', resp.data);
 						console.log(resp);
 					}, function errorCallback(err) {
@@ -15,11 +17,12 @@
 					});
 			}else{
 				console.log('trending data');
+
+				// sending request to server if user is not nogged in
 				userDataService.getData()
 					.then(function(resp) {
 						$scope.trendingData = resp.data;
 						$scope.posts = $scope.trendingData.posts[0];
-						console.log($scope.tags = resp.data.posts[0].tags);
 						$rootScope.$broadcast('senddown', resp.data);
 						console.log($scope.trendingData);
 					}, function errorCallback(err) {
