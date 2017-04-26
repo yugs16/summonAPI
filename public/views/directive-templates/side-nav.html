@@ -1,27 +1,38 @@
-<md-sidenav
-	md-is-locked-open="$mdMedia('min-width: 600px')"
-	md-is-closed="$mdMedia('max-width: 600px')"
-	class="md-sidenav-left sideNav"
-	md-component-id="openedNavBar"
-	flex="100">
-	<md-content layout-padding class="sideNavContent">
-	<ul class="sideMenuList">
-		<li class="sideMenuListItems">
-			<ng-md-icon class="menuIcons" icon="home" style="fill: black" size="20"></ng-md-icon>
-	    	<a ng-href="/home">Home</a>
-		</li>
-		<li class="sideMenuListItems">
-			<ng-md-icon class="menuIcons" icon="face" style="fill: black" size="20"></ng-md-icon>
-	    	<a ng-href="/about">About</a>
-		</li>
-		<li class="sideMenuListItems">
-	    	<ng-md-icon class="menuIcons" icon="contact_phone" style="fill: black" size="20"></ng-md-icon>
-	    	<a ng-href="/contact_us">Contact Us</a>
-		</li>
-		<li class="sideMenuListItems">
-			<ng-md-icon class="menuIcons" icon="person" style="fill: black" size="20"></ng-md-icon>
-	    	<a ng-href="/team">Our Team</a>
-		</li>
-	</ul>
-	</md-content>
-</md-sidenav>
+<section ng-controller="sideNavCtrl" class="sideNavContainer">
+	<md-sidenav
+		md-is-locked-open="$mdMedia('min-width: 960px')"
+		md-is-closed="$mdMedia('max-width: 960px')"
+		class="md-sidenav-left sideNav"
+		md-component-id="openedNavBar"
+		md-whiteframe="8px"
+		flex="100"
+		>
+		<header class="sideNavHeader">
+			<a href="/" ng-href="/">
+				<img src="../images/logo/icon-512x512.png" height="150px" width="150px">
+				<h2 class="md-heading logoBrand">summonAPI</h2>
+			</a>
+		</header>
+		<hr />
+		<md-content layout-padding class="sideNavContent">
+			<md-list class="sideMenuList">
+	 			<md-list-item class="sideMenuListItems" class="md-3-line" ng-click="redirectHomePage()">
+	 				<ng-md-icon class="menuIcons" icon="home" style="fill: white" size="20"></ng-md-icon>
+					<span>&nbsp; Home</span>
+				</md-list-item>
+				<md-list-item class="sideMenuListItems" class="md-3-line" ng-click="redirectAboutPage()">
+					<ng-md-icon class="menuIcons" icon="face" style="fill: white" size="20">&nbsp;</ng-md-icon>
+					<span>&nbsp; About</span>
+				</md-list-item>
+				<md-list-item class="sideMenuListItems" class="md-3-line" ng-click="redirectContactPage()">
+					<ng-md-icon class="menuIcons" icon="phone" style="fill: white" size="20">&nbsp;</ng-md-icon>
+					<span>&nbsp; Contact Us</span>
+				</md-list-item>
+				<md-list-item class="sideMenuListItems" class="md-3-line" ng-click="redirectTeamPage()">
+					<ng-md-icon class="menuIcons" icon="person" style="fill: white" size="20">&nbsp;</ng-md-icon>
+					<span>&nbsp; Our Team</span>
+				</md-list-item>
+			</md-list>
+		</md-content>
+	</md-sidenav>
+</section>

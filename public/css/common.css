@@ -7,12 +7,21 @@ body {
 *:focus {
 	outline: none;
 }
+::-webkit-scrollbar {
+	display: none;
+}
 hr {
-	color: grey;
+	width: 100%;
 }
 
 /*CLASSES*/
-
+.masterContainer {
+	overflow: auto;
+}
+.viewContainer {
+	position: relative;
+	top: 100px;
+}
 /*card styling*/
 /*intro card*/
 .intro_card {
@@ -49,7 +58,7 @@ hr {
 	min-height: 40px;
 	min-width: 40px;
 	object-fit: cover;
-	border: 2px solid white;
+	border: 1px solid white;
 	border-radius: 999px;
 }
 .post_author {
@@ -95,11 +104,13 @@ hr {
 
 /*toolbar styling*/
 .toolbar {
+	position: fixed;
 	color: white;
 	min-height: 100px;
 }
 .userProfileImg {
-	border: 3px solid white;
+	background: -webkit-linear-gradient(82deg, #2196F3, #1976D2) !important;
+	border: 1.5px solid white;
 	border-radius: 999px;
 }
 .brand {
@@ -112,28 +123,44 @@ hr {
 }
 
 /*sidenav styling*/
+.sideNavContainer {
+	height: 100%;
+}
+.sideNavHeader {
+	text-align: center;
+}
+.sideNavHeader a {
+	text-decoration: none;
+}
+.logoBrand {
+	font-weight: bolder;
+	color: white;
+}
+.sideNav, .sideNavContent {
+	background: #1976D2;
+}
 .sideNav {
-	background: #E0E0E0;
+	/*background: lightblue;*/
 	min-height: 100%;
-    max-width: 10em !important;
+    max-width: 16em !important;
 	overflow: hidden;
 }
 .sideNavContent{
-	background: #E0E0E0;
+	/*background: lightblue;*/
 	min-height: 100%;
 }
 .sideMenuList {
 	padding: 0;
 }
 .sideMenuListItems {
-	margin: 2px;
+	margin: 4px;
 	list-style: none;
-	padding: 8px;
+	padding: 10px;
 }
-.sideMenuListItems a {
-	color: #424242 !important;
+.sideMenuListItems span {
+	color: white !important;
 	font-size: 1em;
-	font-weight: bold;
+	font-weight: bolder;
 	text-decoration: none !important;
 }
 .menuIcons svg {

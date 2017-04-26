@@ -1,19 +1,20 @@
-<md-toolbar class="toolbar">
+<md-toolbar class="toolbar" md-whiteframe="4px">
     <h2 class="md-toolbar-tools">
     	<ng-md-icon 
-    		ng-controller="LeftCtrl"
+    		ng-controller="sideNavCtrl"
     		id="menuIcon" 
-    		hide show-xs 
+    		hide-gt-sm
+            show-sm 
     		ng-click="toogleleft()" 
     		icon="menu" 
-    		style="fill: white" 
+    		style="fill: blue" 
     		size="30">
     	</ng-md-icon>
         <span class="brand">Summon<strong>API</strong></span><div flex></div>
-        <md-button class="signupButton" ng-click="loginDialog($event)" ng-if="!userData.loggedOnUser" hide-xs>Login</md-button>
-        <span class="signupButton" ng-click="null" ng-if="userData.loggedOnUser" hide-xs>{{userData.username}}</span>
-        <md-menu ng-if="userData.loggedOnUser" md-position-mode="target-right bottom" hide-xs>
-            <a href="#" class="userImg">
+        <md-button class="signupButton" ng-click="loginDialog($event)" ng-if="!userData.loggedOnUser" show-gt-sm>Login</md-button>
+        <span class="signupButton" ng-click="null" ng-if="userData.loggedOnUser" hide-sm>{{userData.username}}</span>
+        <md-menu ng-if="userData.loggedOnUser" md-position-mode="target-right bottom" hide-sm>
+            <a href="#">
                 &nbsp;
                 <img class="userProfileImg" ng-click="$mdMenu.open($event)" src="../../images/img1.jpg" height="30px" width="30px">
             </a>

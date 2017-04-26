@@ -2,11 +2,15 @@
 	'use strict';
 	
 	angular.module('app', ['ngMaterial', 'ngRoute', 'ngCookies', 'ngMdIcons', 'appRoutes', 'sideNavCtrl', 'homeCtrl', 'aboutCtrl', 'teamCtrl',
- 	'contactCtrl', 'hiddensideNavCtrl', 'createAccountCtrl', 'loginCtrl', 'allDirectives', 'allServices'])
+ 	'contactCtrl', 'sideNavCtrl', 'hiddensideNavCtrl', 'createAccountCtrl', 'loginCtrl', 'allDirectives', 'allServices'])
 
 		.config(['$mdThemingProvider', function($mdThemingProvider) {
 				$mdThemingProvider.theme('default')
-				.primaryPalette('indigo')
-				.accentPalette('orange');
+				.primaryPalette('grey', {
+					'default' : '100',
+					'hue-1' : '800',
+					'hue-2' : '600'
+				})
+				.accentPalette('red');
 		}]);
 })();
