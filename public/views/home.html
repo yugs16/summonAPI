@@ -12,7 +12,7 @@
 	</div>
 	<div flex>
 		<!--info card-->
-		<md-card class="info_card" ng-repeat="i in trendingData.posts">
+		<md-card class="info_card" ng-repeat="i in postData.posts">
 			<md-card-header>
 				<md-card-avatar>
 					<img src="../images/aboutImg.png" class="userImg" />
@@ -43,7 +43,7 @@
 					</div>
 				</div>
 				<div flex flex-order-xs="-1" class="previewContainer">
-					<!-- here goes preview -->
+					<h3>Preview</h3>
 					<img src="../images/aboutImg.png" height="200px" width="200px">
 				</div>
 			</div>
@@ -52,10 +52,10 @@
 			<md-card-actions layout="row" layout-align="start center">
 				<div class="voteContainer">
 					<ng-md-icon ng-click="voteUp(i)" icon="thumb_up" style="fill: grey" size="17"></ng-md-icon>
+					&nbsp; &nbsp;
 					<span>{{i.vote_cnt}}</span>
-					&nbsp;
-					<ng-md-icon ng-click="null" icon="thumb_down" style="fill: grey" size="17"></ng-md-icon>
-					<span>vote_down?</span>
+					&nbsp; &nbsp;
+					<ng-md-icon ng-click="voteDown(i)" icon="thumb_down" style="fill: grey" size="17"></ng-md-icon>
 				</div>
 			</md-card-actions>
 		</md-card>

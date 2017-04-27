@@ -107,6 +107,7 @@ hr {
 	max-height: 100px;
 }
 .previewContainer {
+	padding: 10px;
 	text-align: center;
 }
 .voteContainer {
@@ -158,6 +159,7 @@ hr {
 .sideNav {
 	/*background: lightblue;*/
 	min-height: 100%;
+	width: 17em;
 	overflow: hidden;
 }
 .sideNavContent{
