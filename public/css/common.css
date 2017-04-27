@@ -23,16 +23,24 @@ hr {
 	top: 100px;
 }
 /*card styling*/
+
+.intro_card, .info_card {
+	width: 70%;
+}
+
 /*intro card*/
 .intro_card {
 	position: relative;
-    margin: 5px auto;
+    margin: 15px auto;
     border-radius: 0px;
-    width: 85%;
 }
 .card_title {
 	position: absolute;
 	top: 40px;
+}
+.title_text span{
+	font-size: 30px;
+	font-weight: bold;
 	color: white;
 }
 .intro_card img {
@@ -44,11 +52,14 @@ hr {
 /*info card*/
 .info_card {
 	margin: 10px auto;
-	width: 85%;
+}
+.userName {
+	font-weight: bold;
 }
 .post_title, .post_author, .post_desc {
 	margin: 5px 0 5px 0;
 	font-family: sans-serif;
+	font-weight: bold;
 }
 .post_title, .post_title:hover {
 	color: blue;
@@ -82,16 +93,21 @@ hr {
     margin-bottom: 10px;
     height: 30px;
     font-size: 13px;
+    font-weight: bold;
     line-height: 31px;
     border-radius: 25px;
-    background-color: #F44336;
+    background-color: grey;
 }
 .api_link {
 	text-decoration: none;
 }
 .post_desc {
 	color: grey;
-	font-size: small;
+	font-size: normal;
+	max-height: 100px;
+}
+.previewContainer {
+	text-align: center;
 }
 .voteContainer {
 	padding: 5px 5px 5px 5px;
@@ -142,7 +158,6 @@ hr {
 .sideNav {
 	/*background: lightblue;*/
 	min-height: 100%;
-    max-width: 16em !important;
 	overflow: hidden;
 }
 .sideNavContent{

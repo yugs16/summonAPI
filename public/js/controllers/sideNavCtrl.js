@@ -24,5 +24,8 @@
 			$scope.redirectContactPage = function() {
 				$location.path('/contact_us');
 			}
+			$scope.redirectAddPostPage = function() {
+				$location.path('/add_post');
+			}
 	  });
 })();

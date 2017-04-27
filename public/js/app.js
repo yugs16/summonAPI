@@ -2,7 +2,7 @@
 	'use strict';
 	
 	angular.module('app', ['ngMaterial', 'ngRoute', 'ngCookies', 'ngMdIcons', 'appRoutes', 'sideNavCtrl', 'homeCtrl', 'aboutCtrl', 'teamCtrl',
- 	'contactCtrl', 'sideNavCtrl', 'hiddensideNavCtrl', 'createAccountCtrl', 'loginCtrl', 'allDirectives', 'allServices'])
+ 	'contactCtrl', 'sideNavCtrl', 'hiddensideNavCtrl', 'createAccountCtrl', 'loginCtrl', 'addPostCtrl', 'allDirectives', 'allServices'])
 
 		.config(['$mdThemingProvider', function($mdThemingProvider) {
 				$mdThemingProvider.theme('default')

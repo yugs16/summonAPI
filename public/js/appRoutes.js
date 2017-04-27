@@ -29,6 +29,10 @@ angular.module('appRoutes', [])
 			templateUrl: '../views/login-account.html',
 			controller: 'loginCtrl'
 		})
+		.when('/add_post', {
+			templateUrl: '../views/add-post.html',
+			controller: 'addPostCtrl'
+		})
 		.otherwise({
           redirectTo:'/home'
 		});

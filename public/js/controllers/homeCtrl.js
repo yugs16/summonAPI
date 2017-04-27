@@ -1,7 +1,7 @@
 (function() {
 	'use strict';
 	angular.module('homeCtrl', [])
-		.controller('homeCtrl', ['$scope', '$rootScope', '$mdDialog', '$location', '$window', '$cookies', '$mdSidenav', 'userDataService', function($scope, $rootScope, $mdDialog, $location, $window, $cookies, $mdSidenav, userDataService) {
+		.controller('homeCtrl', ['$scope', '$rootScope', '$mdDialog', '$location', '$window', '$cookies', '$mdSidenav', 'userDataService', 'voteService', function($scope, $rootScope, $mdDialog, $location, $window, $cookies, $mdSidenav, userDataService, voteService) {
 
 			// sending get request to server if user is logged in
 			if ($cookies.get('connect_auth')) {
@@ -45,6 +45,25 @@
 					$scope.status = 'You cancelled the dialog.';
 				});
 			};
+
+			// voting functionality
+			$scope.voteUp = function(data) {
+				if ($cookies.get('connect_auth')) {
+					console.log(data.votes.userDataService);
+					var voteData = {
+						"postId" : data.votes[0].userId,
+						"vote" : true
+					}
+					voteService.getVote()
+						.then(function(resp) {
+							console.log(resp);
+						}, function errorCallback(err) {
+							console.log('error occured', err);
+						})
+				} else {
+					$scope.loginDialog();
+				}
+			}
 
 			// loginDialog controller
 			function loginDialogController($scope, $mdDialog, $location){

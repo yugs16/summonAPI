@@ -39,3 +39,16 @@ angular.module('allServices', [])
 			}
 		}
 	}])	
+
+	.factory('voteService', ['$http', function($http) {
+		return {
+			getVote : function(data) {
+				var config = {
+					 headers : {
+					 	'Content-Type': 'application/json;'
+					 }
+				}
+				return $http.post('/api/editvote');
+			}
+		}
+	}])
