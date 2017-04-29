@@ -1,7 +1,7 @@
 (function() {
 	'use strict';
 	angular.module('homeCtrl', [])
-		.controller('homeCtrl', ['$scope', '$rootScope', '$mdDialog', '$location', '$window', '$cookies', '$mdSidenav', 'userDataService', 'voteService', function($scope, $rootScope, $mdDialog, $location, $window, $cookies, $mdSidenav, userDataService, voteService) {
+		.controller('homeCtrl', ['$scope', '$rootScope', '$mdDialog', '$location', '$window', '$cookies', '$mdSidenav', '$routeParams', 'userDataService', 'voteService', function($scope, $rootScope, $mdDialog, $location, $window, $cookies, $mdSidenav, $routeParams, userDataService, voteService) {
 
 			// sending get request to server if user is logged in
 			if ($cookies.get('connect_auth')) {
@@ -52,9 +52,8 @@
 			// voteUp
 			$scope.voteUp = function(data) {
 				if ($cookies.get('connect_auth')) {
-					console.log(data.votes.userDataService);
 					var voteData = {
-						"postId" : data.votes[0].userId,
+						"postId" : data._id,
 						"vote" : true
 					}
 					voteService.getVote()
@@ -70,7 +69,6 @@
 			// voteDown
 			$scope.voteDown = function(data) {
 				if ($cookies.get('connect_auth')) {
-					console.log(data.votes.userDataService);
 					var voteData = {
 						"postId" : data.votes[0].userId,
 						"vote" : false
@@ -84,6 +82,12 @@
 				} else {
 					$scope.loginDialog();
 				}
+			}
+
+			// redirect to detailed page
+			$scope.details = function(data) {
+				console.log(data._id);
+				$location.path('/details/' + data._id);
 			}
 
 			// loginDialog controller

@@ -50,13 +50,14 @@
 			</md-card-content>
 			<hr />
 			<md-card-actions layout="row" layout-align="start center">
-				<div class="voteContainer">
+				<div class="voteContainer" flex>
 					<ng-md-icon ng-click="voteUp(i)" icon="thumb_up" style="fill: grey" size="17"></ng-md-icon>
 					&nbsp; &nbsp;
 					<span>{{i.vote_cnt}}</span>
 					&nbsp; &nbsp;
 					<ng-md-icon ng-click="voteDown(i)" icon="thumb_down" style="fill: grey" size="17"></ng-md-icon>
 				</div>
+				<md-button ng-click="details(i)" class="md-raised md-warn postDetailBtn" aria-label="postDetailBtn">Details</md-button>
 			</md-card-actions>
 		</md-card>
 	</div>

@@ -111,6 +111,10 @@ hr {
 	padding: 10px;
 	text-align: center;
 }
+.previewContainer h3 {
+	margin: auto;
+	padding: 5px;
+}
 .voteContainer {
 	padding: 5px 5px 5px 5px;
 }
@@ -138,6 +142,10 @@ hr {
 	margin: auto;
 	margin-top: 0.6em;
 	margin-left: 0.5em;
+}
+.loggedInUsername {
+	vertical-align: super;
+	font-weight: bold;
 }
 
 /*sidenav styling*/
