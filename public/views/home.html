@@ -15,7 +15,7 @@
 		<md-card class="info_card" ng-repeat="i in postData.posts">
 			<md-card-header>
 				<md-card-avatar>
-					<img src="../images/aboutImg.png" class="userImg" />
+					<img src="../images/profile/{{i.userInfo.profile_pic}}" class="userImg" />
 				</md-card-avatar>
 				<md-card-header-text>
 					<span class="md-title userName">{{i.userInfo.username | uppercase}}</span>

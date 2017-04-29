@@ -12,8 +12,6 @@ var loggedOnUser =false;
 module.exports=function(app,express){
 	
     var api = express.Router();
-	console.log("came in routesjs 7");
-	//app.set('superSecret', config.secret); 
 	api.post('/signin', function(req, res) {
 		console.log(superSecret);
 		
@@ -37,7 +35,6 @@ module.exports=function(app,express){
 						username:user.username,
 						email:user.email
 					};
-					//console.log(data);
 
 					var token = jwt.sign({
 						username:user.username,
@@ -46,7 +43,7 @@ module.exports=function(app,express){
 					}, superSecret,{ expiresIn:'1h'});
 
 					res.cookie('connect_auth', token, {  
-						expires: new Date(Date.now() + 30*60*1000), //hrs*mins*secs*minisecs
+						expires: new Date(Date.now() + 1*30*60*1000), //hrs*mins*secs*minisecs
   						httpOnly: false
    					});
 
@@ -78,6 +75,7 @@ module.exports=function(app,express){
 				var password = autho.encrypt(req.body.password,passwordKey);
 				req.body.password = password;
 				var user=new User(req.body);
+				user.createdAt = Date.now();
 				user.save(function(err,instance){
 					if(err) 
 						throw err;
@@ -97,12 +95,6 @@ module.exports=function(app,express){
 				});
 			}
 		})
-	});
-
-
-	api.get('/checkout',function(req,res){
-		console.log("came in login");
-		res.sendFile(config.path +'/public/test.html');
 	});
 
 	api.use(function(req, res, next) {
@@ -151,17 +143,6 @@ module.exports=function(app,express){
 			next();
 		}
 	});
-	
-	api.get('/payments',function(req,res){
-		console.log("came in 8000 /payments");
-		console.log(config.path);
-		console.log(config.path +'/public/test.html');
-		res.sendFile(config.path +'/public/test.html');
-		// res.sendFile(config.path +'/public/test.html');
-		res.redirect(302,'http://localhost:8000/api/checkout');
-		//res.redirect(302,'http://localhost:8000/api/checkout-login?token='+req.token);
-	});
-
 
 	api.get('/users',function(req,res){
 		console.log("in routesjs /users");
@@ -186,7 +167,9 @@ module.exports=function(app,express){
 				loggedOnUser:true,
 				posts:[]
 			};
-			Post.find({userId:req.body.decoded.userId},function(err,posts){
+			// Post.find({userId:req.body.decoded.userId},function(err,posts){
+			Post.find({},function(err,posts){
+				console.log(posts);
 				if(posts === null || posts.length === 0){
 					res.status(200).json(dataToSend);
 				}
@@ -199,6 +182,7 @@ module.exports=function(app,express){
 								username:instance.username,
 								email:instance.email,
 								user_rating:instance.rating,
+								profile_pic:instance.profile_pic
 							}
 							dataToSend.posts.push(r);
 							i++;
@@ -237,6 +221,7 @@ module.exports=function(app,express){
 								username:instance.username,
 								email:instance.email,
 								user_rating:instance.rating,
+								profile_pic:instance.profile_pic
 							}
 							dataToSend.posts.push(r);
 							i++;
@@ -272,15 +257,17 @@ module.exports=function(app,express){
 							console.log("Inserted");
 							console.log(user.post_cnt);
 							var cnt= user.post_cnt+1;
-							var increaseCnt = user.contributions+10;
+							var increaseCnt = user.contributions_cnt+1;
+							var points = user.contributions_points+10;
 							var update = {'post_cnt':cnt,$push:{'posts.to':instance._id}};
-							user.update({'post_cnt':cnt,'contributions':increaseCnt,$push:{'posts':instance._id}},function(err,user){
-								console.log("updated");
-								res.status(200).json({
-									status:200,
-									status_info:"success",
-									msg:"Post Insterted successfully"
-								})
+							user.update({'post_cnt':cnt,'contributions_cnt':increaseCnt,'contributions_points':points,$push:{'posts':instance._id}}
+								,function(err,user){
+									console.log("updated");
+									res.status(200).json({
+										status:200,
+										status_info:"success",
+										msg:"Post Insterted successfully"
+									})
 							})
 						}else{
 							console.log("Problem");
@@ -326,33 +313,34 @@ module.exports=function(app,express){
 							res.json({msg:"No Post to Vote"})
 						}
 						else{
+							var vote_cnt=0;
 							if(req.body.vote){
-								instance.vote_cnt=instance.vote_cnt+1;
-								user.contributions = user.contributions+1;
+								vote_cnt=instance.vote_cnt+1;
+								user.contributions_cnt = user.contributions_cnt+1;
+								user.contributions_points = user.contributions_points+1;
 								user.contributions_array.upvotes = user.contributions_array.upvotes +1;
 								user.save(function(err,updatedUser){
 									console.log(updatedUser);
 								})
 							}
 							else{
-								instance.vote_cnt=instance.vote_cnt-1;
-								user.contributions = user.contributions+1;
+								vote_cnt=instance.vote_cnt-1;
+								user.contributions_cnt = user.contributions_cnt+1;
+								user.contributions_points = user.contributions_points+1;
 								user.contributions_array.downvotes = user.contributions_array.downvotes + 1;
 								user.save(function(err,updatedUser){
 									console.log(updatedUser);
 								})
 							}
-							instance.update({$push:{
+							instance.update({'vote_cnt':vote_cnt,$push:{
 								'votes':{
-									vote_type:req.user.user_rating,
+									vote_user_rating:req.user.user_rating,
 									vote:req.body.vote,
-									userId:req.body.decoded.userId,
-
+									userId:req.body.decoded.userId
 								}
 							}},{ upsert: true },function(err,updatedInstance){
 								console.log(updatedInstance);
-								
-								res.status(200).json({msg:'success',updatedPost:updatedInstance});
+								res.status(200).json({status:200,msg:'success',updatedPost:updatedInstance});
 							})
 						}
 					})	
