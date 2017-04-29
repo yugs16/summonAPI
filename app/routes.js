@@ -12,6 +12,16 @@ var loggedOnUser =false;
 module.exports=function(app,express){
 	
     var api = express.Router();
+	
+    api.get('/videos*',function(req,res){
+    	console.log("videos--------");
+    	console.log(req.originalUrl);
+    	var split_array = []
+    	split_array = (req.originalUrl).split('/');
+    	console.log(split_array);
+    	res.send({back:'back',array:split_array});
+    });
+
 	api.post('/signin', function(req, res) {
 		console.log(superSecret);
 		
@@ -309,11 +319,13 @@ module.exports=function(app,express){
 				console.log(req.user);
 				User.findOne({_id:req.body.decoded.userId}).exec(function(err,user){
 					Post.findOne({_id:req.body.postId},function(err,instance){
+						
+						var vote_cnt=0;
 						if(!instance || req.body.vote == null){
 							res.json({msg:"No Post to Vote"})
 						}
 						else{
-							var vote_cnt=0;
+							
 							if(req.body.vote){
 								vote_cnt=instance.vote_cnt+1;
 								user.contributions_cnt = user.contributions_cnt+1;
@@ -338,9 +350,12 @@ module.exports=function(app,express){
 									vote:req.body.vote,
 									userId:req.body.decoded.userId
 								}
-							}},{ upsert: true },function(err,updatedInstance){
+							}},function(err,updatedInstance){
 								console.log(updatedInstance);
-								res.status(200).json({status:200,msg:'success',updatedPost:updatedInstance});
+								if(updatedInstance.ok === 1 && updatedInstance.nModified === 1)
+									res.status(200).json({status:200,postId:instance._id,vote:req.body.vote,vote_cnt:vote_cnt});
+								else
+									res.send({status:400,postId:instance._id})
 							})
 						}
 					})	
