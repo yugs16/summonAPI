@@ -56,6 +56,7 @@ angular.module('allServices', [])
 	.factory('postDetailService', ['$http', '$routeParams', function($http, $routeParams) {
 		return {
 			getPostDetails : function(routeParams) {
+				console.log(routeParams.id);
 				var config = {
 					headers : {
 						'Content-Type' : 'application/json;'
@@ -63,7 +64,7 @@ angular.module('allServices', [])
 				}
 				return $http.get('/api/details', {
 					params : {
-						_id : routeParams._id
+						postId : routeParams.id
 					}
 				})
 			}

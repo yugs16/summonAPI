@@ -86,7 +86,6 @@
 
 			// redirect to detailed page
 			$scope.details = function(id) {
-				console.log($routeParams);
 				$location.path('/details/' + id);
 			}
 
