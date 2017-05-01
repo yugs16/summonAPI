@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "test": "server",
-    "postinstall": "bower cache clean && bower install",
+    "postinstall": "bower install",
     "start": "node server.js"
   },
   "author": "yugal",
