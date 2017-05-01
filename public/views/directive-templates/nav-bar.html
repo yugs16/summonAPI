@@ -1,3 +1,8 @@
+<style type="text/css">
+.signupButton{
+    margin-right: 5%;
+}
+</style>
 <md-toolbar class="toolbar" md-whiteframe="6px">
     <h2 class="md-toolbar-tools">
     	<ng-md-icon 
@@ -11,8 +16,8 @@
     		size="30">
     	</ng-md-icon>
         <span class="brand">Summon<strong>API</strong></span><div flex></div>
-        <md-button class="signupButton" ng-click="loginDialog($event)" ng-if="!userData.loggedOnUser">Login</md-button>
-        <span class="signupButton" ng-click="null" ng-if="userData.loggedOnUser" hide-sm>{{userData.username}}</span>
+        <md-button class="signupButton" ng-click="loginDialog($event)">Login</md-button>
+        <span class="signupButton" ng-click="null" ng-if="userData.loggedOnUser">{{userData.username}}</span>
         <md-menu ng-if="userData.loggedOnUser" md-position-mode="target-right bottom" hide-sm>
             <a href="#">
                 &nbsp;
