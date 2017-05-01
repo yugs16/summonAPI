@@ -12,14 +12,15 @@ var post=new mongoose.Schema({
 	code_file:"String",
 	git_link:"String",
 	views:{type:"Number",default:0},
-	vote_cnt:{type:"Number",default:0},
+	up_vote_cnt:{type:"Number",default:0},
+	down_vote_cnt:{type:"Number",default:0},
 	votes:[{
 		voted_user_rating:{type:"Number",default:1},              //its user raitng... 4 star user 3star user.
 		vote:{type:"boolean"},
 		userId:{type:"String"},
 		_id:false
 	}],
-	haveTrendingAccess:{type:"boolean",default:false},
+	haveTrendingAccess:{type:"boolean",default:true},
 	tags:["String"],
 	createdAt:{type:'date',default:Date.now}
 },{collection: 'posts'});

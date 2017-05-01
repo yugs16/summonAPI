@@ -12,15 +12,6 @@ var loggedOnUser =false;
 module.exports=function(app,express){
 	
     var api = express.Router();
-	
-    api.get('/videos*',function(req,res){
-    	console.log("videos--------");
-    	console.log(req.originalUrl);
-    	var split_array = []
-    	split_array = (req.originalUrl).split('/');
-    	console.log(split_array);
-    	res.send({back:'back',array:split_array});
-    });
 
 	api.post('/signin', function(req, res) {
 		console.log(superSecret);
@@ -112,7 +103,7 @@ module.exports=function(app,express){
 		// check header or url parameters or post parameters for token
 
 		var token;
-		console.log(req.cookies);
+		//console.log(req.cookies);
 		// console.log(req.cookies.connect_auth);
 		if(req.cookies.connect_auth){
 			token = req.cookies.connect_auth;
@@ -127,7 +118,7 @@ module.exports=function(app,express){
 			  } else {
 				    // if everything is good, save to request for use in other routes
 				   	req.loggedOnUser =true;
-				   	console.log(decoded);
+				   	//console.log(decoded);
 				   	req.body.decoded = decoded;  
 				   	// console.log(decoded._doc);
 				   	req.token = token; 
@@ -155,8 +146,8 @@ module.exports=function(app,express){
 	});
 
 	api.get('/users',function(req,res){
-		console.log("in routesjs /users");
-		console.log(req.body);
+		//console.log("in routesjs /users");
+		//console.log(req.body);
 
 		User.find({},function(err,user){
 			if(err) throw err;
@@ -169,13 +160,13 @@ module.exports=function(app,express){
 		//console.log(loggedOnUser);
 		
 		if(req.loggedOnUser){
-			console.log("in routesjs /users");
+			console.log("LoggedOnUser");
 			var i=0;
 			var dataToSend = {
 				username:req.body.decoded.username,
 				email:req.body.decoded.email,
 				loggedOnUser:true,
-				posts:[]
+				posts:[],
 			};
 			// Post.find({userId:req.body.decoded.userId},function(err,posts){
 			Post.find({},function(err,posts){
@@ -184,17 +175,32 @@ module.exports=function(app,express){
 					res.status(200).json(dataToSend);
 				}
 				else{
+					console.log("No of posts: %s",posts.length);
 					posts.forEach(function(onePost){
-						var flag=false;
-
+						var vote_active =0;
 						User.findOne({ _id:onePost.userId},function(err,instance){
 							var r = onePost.toObject();
+							var votes=r.votes;
+							for(j=0;j<r.votes.length;j++){
+	 							if(req.user.id === votes[j].userId){
+	 								if(votes[j].vote)
+	 									vote_active = 1;
+	 								else{
+	 									vote_active = -1;
+	 								}
+	 								break;
+	 							}
+	 							console.log('in for');
+							}
+							console.log("Out of for");
+							delete r.votes;
 							r.userInfo = {
 								userId:instance._id,
 								username:instance.username,
 								email:instance.email,
 								user_rating:instance.rating,
-								profile_pic:instance.profile_pic
+								profile_pic:instance.profile_pic,
+								vote_active:vote_active
 							}
 							dataToSend.posts.push(r);
 							i++;
@@ -202,47 +208,13 @@ module.exports=function(app,express){
 								res.status(200).json(dataToSend);
 							}
 						})
-
-						// User.findOne({ _id:onePost.userId},function(err,instance){
-						// 	var r = onePost.toObject();
-						// 	console.log(r.votes);
-						// 	r.vote_active=false;
-						// 	r.userInfo = {
-						// 		userId:instance._id,
-						// 		username:instance.username,
-						// 		email:instance.email,
-						// 		user_rating:instance.rating,
-						// 		profile_pic:instance.profile_pic
-						// 	}	
-						// 	var j=0;
-						// 	(r.votes).forEach(function(vote){
-						// 		if(vote.userId === req.user.id){
-						// 			r.vote_active=true;
-						// 			flag = true;
-						// 			break;
-						// 		}
-						// 		j++;
-						// 		if(j === (r.votes).length){
-						// 			flag=true
-						// 			break;
-						// 		}
-						// 	})
-						// 	if(flag)
-						// 	{	
-						// 		i++;
-						// 		dataToSend.posts.push(r);
-						// 	}
-						// 	if(posts.length === i){
-						// 		res.status(200).json(dataToSend);
-						// 	}
-						// })
 					})	
 				}	
 			})
 			//console.log(req.body);
 		}
 		else{
-			console.log("Came in /me else");
+			console.log("Not logged on");
 			var i=0;
 			var dataToSend={
 				trending:true,
@@ -250,15 +222,11 @@ module.exports=function(app,express){
 				posts:[]
 			};
 			Post.find({haveTrendingAccess:true},function(err,posts){
-				console.log(posts);
-				console.log("ok");
-				//dataToSend = posts;
-				if(posts === null || posts.length === 0){
-					console.log("came in null");
+				if(posts === null || posts.length<0){
+					console.log("Post is null");
 					res.status(200).json(dataToSend);
 				}
 				else{
-					console.log("came in else again");
 					posts.forEach(function(onePost){
 						User.findOne({ _id:onePost.userId},function(err,instance){
 							var r = onePost.toObject();
@@ -284,7 +252,7 @@ module.exports=function(app,express){
 
 	api.post('/addPost',function(req,res){
 		if(req.loggedOnUser){
-			console.log("add post");
+			console.log("Logged onAdd post");
 			//console.log(req.body.decoded);
 			User.findOne({
 					_id:req.body.decoded.userId,
@@ -345,42 +313,43 @@ module.exports=function(app,express){
 			});
 		}
 		else{
-
 			if(!req.body.postId && (req.body.vote === null)){
-				console.log("came in if for /editvote");
+				//console.log("came in if for /editvote");
 				res.json({msg:"failure",info:"Check for postId or is vote there."});
 			}
 			else{
-			
-				console.log(req.user);
+				
 				User.findOne({_id:req.body.decoded.userId}).exec(function(err,user){
 					Post.findOne({_id:req.body.postId},function(err,instance){
-						
 						var vote_cnt=0;
+						var vote_update_in;
 						if(!instance || req.body.vote == null){
 							res.json({msg:"No Post to Vote"})
 						}
 						else{
-							
-							if(req.body.vote){
-								vote_cnt=instance.vote_cnt+1;
-								user.contributions_cnt = user.contributions_cnt+1;
-								user.contributions_points = user.contributions_points+1;
+							if(req.body.vote === true || req.body.vote === "true"){
+								vote_update_in = "up_vote_cnt";
+								vote_cnt=instance.up_vote_cnt+1;
 								user.contributions_array.upvotes = user.contributions_array.upvotes +1;
-								user.save(function(err,updatedUser){
-									console.log(updatedUser);
-								})
+								instance.up_vote_cnt=vote_cnt;
 							}
 							else{
-								vote_cnt=instance.vote_cnt-1;
-								user.contributions_cnt = user.contributions_cnt+1;
-								user.contributions_points = user.contributions_points+1;
+								vote_update_in = "down_vote_cnt";
+								vote_cnt=instance.down_vote_cnt+1;
 								user.contributions_array.downvotes = user.contributions_array.downvotes + 1;
-								user.save(function(err,updatedUser){
-									console.log(updatedUser);
-								})
+								instance.down_vote_cnt=vote_cnt;
 							}
-							instance.update({'vote_cnt':vote_cnt,$push:{
+							user.contributions_cnt = user.contributions_cnt+1;
+							user.contributions_points = user.contributions_points+1;	
+							user.save(function(err,updatedUser){
+								//console.log(updatedUser);
+							})
+							
+							instance.save(function(err,modified){
+
+							});
+
+							instance.update({$push:{
 								'votes':{
 									vote_user_rating:req.user.user_rating,
 									vote:req.body.vote,
@@ -388,8 +357,12 @@ module.exports=function(app,express){
 								}
 							}},function(err,updatedInstance){
 								console.log(updatedInstance);
-								if(updatedInstance.ok === 1 && updatedInstance.nModified === 1)
-									res.status(200).json({status:200,postId:instance._id,vote:req.body.vote,vote_cnt:vote_cnt});
+								if(updatedInstance.ok === 1 && updatedInstance.nModified === 1){
+									if(req.body.vote === true || req.body.vote === "true")
+										res.status(200).json({status:200,postId:instance._id,vote:req.body.vote,up_vote_cnt:vote_cnt});
+									else
+										res.status(200).json({status:200,postId:instance._id,vote:req.body.vote,down_vote_cnt:vote_cnt});
+								}
 								else
 									res.send({status:400,postId:instance._id})
 							})
@@ -401,9 +374,7 @@ module.exports=function(app,express){
 	})
 
 	api.get('/details',function(req,res){
-		
-		console.log(req.query);
-
+	
 		if(!req.loggedOnUser){
 			res.json({
 				'redirectUrl':'/login',
@@ -412,25 +383,39 @@ module.exports=function(app,express){
 		}
 		else{
 			Post.findOne({_id:req.query.postId},function(err,post){
-				console.log(post);
+				//console.log(post);
 				//dataToSend = posts;
 				var dataToSend={
 					loggedOnUser:true,
-					post:post
 				};
 				if(post === null || post.length === 0){
-					console.log("came in null");
+					console.log("No post");
 					res.status(200).json(dataToSend);
 				}
 				else{
-					console.log("came in else again");
 					User.findOne({ _id:post.userId},function(err,instance){
+						var r = post.toObject();
+						var vote_active=0;
+						var votes=r.votes;
+						for(j=0;j<r.votes.length;j++){
+ 							if(req.user.id === votes[j].userId){
+ 								if(votes[j].vote)
+ 									vote_active = 1;
+ 								else{
+ 									vote_active = -1;
+ 								}
+ 								break;
+ 							}
+ 						}
+						delete r.votes;
+						dataToSend.post = r;
 						dataToSend.userInfo = {
 							userId:instance._id,
 							username:instance.username,
 							email:instance.email,
 							user_rating:instance.rating,
-							profile_pic:instance.profile_pic
+							profile_pic:instance.profile_pic,
+							vote_active:vote_active
 						}
 						res.send(dataToSend);
 					})					
