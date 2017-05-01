@@ -1,14 +1,15 @@
 (function() {
 	'use strict';
 	angular.module('homeCtrl', [])
-		.controller('homeCtrl', ['$scope', '$rootScope', '$mdDialog', '$location', '$window', '$cookies', '$mdSidenav', 'userDataService', 'voteService', function($scope, $rootScope, $mdDialog, $location, $window, $cookies, $mdSidenav, userDataService, voteService) {
+		.controller('homeCtrl', ['$scope', '$rootScope', '$mdDialog', '$location', '$window', '$cookies', '$mdSidenav', '$routeParams', 'userDataService', 'voteService', function($scope, $rootScope, $mdDialog, $location, $window, $cookies, $mdSidenav, $routeParams, userDataService, voteService) {
 
 			// sending get request to server if user is logged in
 			if ($cookies.get('connect_auth')) {
 				console.log('user data : ');
 				userDataService.getData()
 					.then(function(resp) {
-						$rootScope.userData = resp.data;
+						$rootScope.postData = resp.data;
+
 						//data sharing among controllers 
 						$rootScope.$broadcast('senddown', resp.data);
 						console.log(resp);
@@ -16,15 +17,16 @@
 						console.log(err);
 					});
 			}else{
-				console.log('trending data');
+				console.log('post data');
 
 				// sending request to server if user is not nogged in
 				userDataService.getData()
 					.then(function(resp) {
-						$scope.trendingData = resp.data;
-						$scope.posts = $scope.trendingData.posts[0];
+						$scope.postData = resp.data;
+
+						// data sharing among controllers 
 						$rootScope.$broadcast('senddown', resp.data);
-						console.log($scope.trendingData);
+						console.log($scope.postData);
 					}, function errorCallback(err) {
 						console.log(err);
 					});
@@ -47,11 +49,11 @@
 			};
 
 			// voting functionality
+			// voteUp
 			$scope.voteUp = function(data) {
 				if ($cookies.get('connect_auth')) {
-					console.log(data.votes.userDataService);
 					var voteData = {
-						"postId" : data.votes[0].userId,
+						"postId" : data._id,
 						"vote" : true
 					}
 					voteService.getVote()
@@ -63,6 +65,29 @@
 				} else {
 					$scope.loginDialog();
 				}
+			}
+			// voteDown
+			$scope.voteDown = function(data) {
+				if ($cookies.get('connect_auth')) {
+					var voteData = {
+						"postId" : data.votes[0].userId,
+						"vote" : false
+					}
+					voteService.getVote()
+						.then(function(resp) {
+							console.log(resp);
+						}, function errorCallback(err) {
+							console.log('error occured', err);
+						})
+				} else {
+					$scope.loginDialog();
+				}
+			}
+
+			// redirect to detailed page
+			$scope.details = function(id) {
+				console.log($routeParams);
+				$location.path('/details/' + id);
 			}
 
 			// loginDialog controller

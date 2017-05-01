@@ -7,7 +7,6 @@ var post=new mongoose.Schema({
 	title:{type:'String',default:'',required:true},
 	description:{type:'String',default:'',required:true},
 	api_link:{type:'String'},
-	rating:{type:"Number",default:0},
 	public_post:{type:'boolean'},
 	private_post:{type:'boolean'},
 	code_file:"String",
@@ -15,7 +14,7 @@ var post=new mongoose.Schema({
 	views:{type:"Number",default:0},
 	vote_cnt:{type:"Number",default:0},
 	votes:[{
-		vote_type:{type:"Number",default:1},              //its user raitng... 4 star user 3star user.
+		voted_user_rating:{type:"Number",default:1},              //its user raitng... 4 star user 3star user.
 		vote:{type:"boolean"},
 		userId:{type:"String"},
 		_id:false

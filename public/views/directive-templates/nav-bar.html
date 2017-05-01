@@ -42,4 +42,46 @@
             </md-menu-content>
         </md-menu>
     </h2>
+    <div class="md-toolbar-tools" layout="row">
+        <div flex>
+        	<ng-md-icon 
+        		ng-controller="sideNavCtrl"
+        		id="menuIcon" 
+        		hide-gt-sm
+                show-sm 
+        		ng-click="toogleleft()" 
+        		icon="menu" 
+        		style="fill: blue" 
+        		size="30">
+        	</ng-md-icon>
+            <span class="brand">Summon<strong>API</strong></span>
+        </div>
+        <div hide show-gt-sm flex>
+            <md-button class="signupButton" ng-click="loginDialog($event)" ng-if="!postData.loggedOnUser">Login</md-button>
+            <span class="loggedInUsername" ng-click="null" ng-if="postData.loggedOnUser">{{postData.username}}</span>
+            <md-menu ng-if="postData.loggedOnUser" md-position-mode="target-right bottom">
+                <a href="#">
+                    &nbsp;
+                    <img class="userProfileImg" ng-click="$mdMenu.open($event)" src="../../images/profile/profile1.png" height="30px" width="30px">
+                </a>
+                <md-menu-content width="3" >
+                    <md-menu-item>
+                        <md-button ng-click="null">
+                            View Profile
+                        </md-button>
+                    </md-menu-item>
+                    <md-menu-item>
+                        <md-button ng-click="null">
+                            Settings
+                        </md-button>
+                    </md-menu-item>
+                    <md-menu-item>
+                        <md-button ng-click="logout()">
+                            Log Out
+                        </md-button>
+                    </md-menu-item>
+                </md-menu-content>
+            </md-menu>
+        </div>
+    </div>
 </md-toolbar>
