@@ -132,7 +132,7 @@ hr {
 .userProfileImg {
 	background: -webkit-linear-gradient(82deg, #2196F3, #1976D2) !important;
 	border: 1.5px solid white;
-	border-radius: 999px;
+	border-radius: 9px;
 }
 .brand {
 	cursor: pointer;
