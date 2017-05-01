@@ -112,7 +112,7 @@ module.exports=function(app,express){
 		// check header or url parameters or post parameters for token
 
 		var token;
-		console.log(req.cookies);
+		//console.log(req.cookies);
 		// console.log(req.cookies.connect_auth);
 		if(req.cookies.connect_auth){
 			token = req.cookies.connect_auth;
@@ -127,7 +127,7 @@ module.exports=function(app,express){
 			  } else {
 				    // if everything is good, save to request for use in other routes
 				   	req.loggedOnUser =true;
-				   	console.log(decoded);
+				   	//console.log(decoded);
 				   	req.body.decoded = decoded;  
 				   	// console.log(decoded._doc);
 				   	req.token = token; 
@@ -155,8 +155,8 @@ module.exports=function(app,express){
 	});
 
 	api.get('/users',function(req,res){
-		console.log("in routesjs /users");
-		console.log(req.body);
+		//console.log("in routesjs /users");
+		//console.log(req.body);
 
 		User.find({},function(err,user){
 			if(err) throw err;
@@ -169,7 +169,7 @@ module.exports=function(app,express){
 		//console.log(loggedOnUser);
 		
 		if(req.loggedOnUser){
-			console.log("in routesjs /users");
+			console.log("LoggedOnUser");
 			var i=0;
 			var dataToSend = {
 				username:req.body.decoded.username,
@@ -184,14 +184,12 @@ module.exports=function(app,express){
 					res.status(200).json(dataToSend);
 				}
 				else{
-					console.log(posts.length);
+					console.log("No of posts: %s",posts.length);
 					posts.forEach(function(onePost){
 						var vote_active =0;
 						User.findOne({ _id:onePost.userId},function(err,instance){
 							var r = onePost.toObject();
-							console.log("in query");
 							var votes=r.votes;
-							console.log(req.user);
 							for(j=0;j<r.votes.length;j++){
 	 							if(req.user.id === votes[j].userId){
 	 								if(votes[j].vote)
@@ -225,7 +223,7 @@ module.exports=function(app,express){
 			//console.log(req.body);
 		}
 		else{
-			console.log("Came in /me else");
+			console.log("Not logged on");
 			var i=0;
 			var dataToSend={
 				trending:true,
@@ -233,15 +231,11 @@ module.exports=function(app,express){
 				posts:[]
 			};
 			Post.find({haveTrendingAccess:true},function(err,posts){
-				//console.log(posts);
-				//console.log("ok");
-				//dataToSend = posts;
 				if(posts === null || posts.length<0){
-					console.log("came in null");
+					console.log("Post is null");
 					res.status(200).json(dataToSend);
 				}
 				else{
-					//console.log("came in else again");
 					posts.forEach(function(onePost){
 						User.findOne({ _id:onePost.userId},function(err,instance){
 							var r = onePost.toObject();
@@ -267,7 +261,7 @@ module.exports=function(app,express){
 
 	api.post('/addPost',function(req,res){
 		if(req.loggedOnUser){
-			console.log("add post");
+			console.log("Logged onAdd post");
 			//console.log(req.body.decoded);
 			User.findOne({
 					_id:req.body.decoded.userId,
@@ -329,7 +323,7 @@ module.exports=function(app,express){
 		}
 		else{
 			if(!req.body.postId && (req.body.vote === null)){
-				console.log("came in if for /editvote");
+				//console.log("came in if for /editvote");
 				res.json({msg:"failure",info:"Check for postId or is vote there."});
 			}
 			else{
@@ -338,7 +332,6 @@ module.exports=function(app,express){
 					Post.findOne({_id:req.body.postId},function(err,instance){
 						var vote_cnt=0;
 						var vote_update_in;
-						console.log(instance)
 						if(!instance || req.body.vote == null){
 							res.json({msg:"No Post to Vote"})
 						}
@@ -358,7 +351,7 @@ module.exports=function(app,express){
 							user.contributions_cnt = user.contributions_cnt+1;
 							user.contributions_points = user.contributions_points+1;	
 							user.save(function(err,updatedUser){
-								console.log(updatedUser);
+								//console.log(updatedUser);
 							})
 							
 							instance.save(function(err,modified){
@@ -390,9 +383,7 @@ module.exports=function(app,express){
 	})
 
 	api.get('/details',function(req,res){
-		
-		console.log(req.query);
-
+	
 		if(!req.loggedOnUser){
 			res.json({
 				'redirectUrl':'/login',
@@ -401,25 +392,39 @@ module.exports=function(app,express){
 		}
 		else{
 			Post.findOne({_id:req.query.postId},function(err,post){
-				console.log(post);
+				//console.log(post);
 				//dataToSend = posts;
 				var dataToSend={
 					loggedOnUser:true,
-					post:post
 				};
 				if(post === null || post.length === 0){
-					console.log("came in null");
+					console.log("No post");
 					res.status(200).json(dataToSend);
 				}
 				else{
-					console.log("came in else again");
 					User.findOne({ _id:post.userId},function(err,instance){
+						var r = post.toObject();
+						var vote_active=0;
+						var votes=r.votes;
+						for(j=0;j<r.votes.length;j++){
+ 							if(req.user.id === votes[j].userId){
+ 								if(votes[j].vote)
+ 									vote_active = 1;
+ 								else{
+ 									vote_active = -1;
+ 								}
+ 								break;
+ 							}
+ 						}
+						delete r.votes;
+						dataToSend.post = r;
 						dataToSend.userInfo = {
 							userId:instance._id,
 							username:instance.username,
 							email:instance.email,
 							user_rating:instance.rating,
-							profile_pic:instance.profile_pic
+							profile_pic:instance.profile_pic,
+							vote_active:vote_active
 						}
 						res.send(dataToSend);
 					})					

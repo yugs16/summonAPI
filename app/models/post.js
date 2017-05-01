@@ -20,7 +20,7 @@ var post=new mongoose.Schema({
 		userId:{type:"String"},
 		_id:false
 	}],
-	haveTrendingAccess:{type:"boolean",default:false},
+	haveTrendingAccess:{type:"boolean",default:true},
 	tags:["String"],
 	createdAt:{type:'date',default:Date.now}
 },{collection: 'posts'});
