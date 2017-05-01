@@ -5,6 +5,7 @@
   "main": "server.js",
   "scripts": {
     "test": "server",
+    "postinstall": "bower install",
     "start": "node server.js"
   },
   "author": "yugal",
@@ -18,6 +19,8 @@
   },
   "dependencies": {
     "body-parser": "~1.16.1",
+    "bower": "^1.8.0",
+    "cookie": "~0.3.1",
     "cookie-parser": "^1.4.3",
     "express": "^4.15.2",
     "install": "^0.8.8",
@@ -28,7 +31,6 @@
     "ng-cookies": "^1.0.2",
     "node-autho": "0.0.6",
     "nodemon": "^1.11.0",
-    "npm": "^4.4.4",
-    "cookie": "~0.3.1"
+    "npm": "^4.4.4"
   }
 }
