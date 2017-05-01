@@ -1,0 +1,43 @@
+<section class="addpostsection"  md-whiteframe="8px">
+
+	<div ng-controller="addPostCtrl" ng-cloak class="md-inline-form">
+
+
+	 	<md-content layout-padding>
+	 		<form name="addpostForm"></form>
+	 			<md-input-container class="md-block">
+	 				<label>Title</label>
+	 					<input md-maxlength="50" required name="apiName" ng-model="api.name">
+	 						<div ng-messages="addpostForm.apiName.$error">
+	 							<div ng-message=" required"> This is required.</div>
+	 						</div>
+	 			</md-input-container>
+
+	 			<md-input-container class="md-block">
+	 				<label>Link</label>
+	 					<input md-maxlength="50" required md-no-asterisk name="description" ng-model="api.description">
+	 						<div ng-messages="addpostForm.description.$error">
+	 							<div ng-message=" required"> This is required.</div>
+	 							<div ng-message="md-maxlength">This Description must be less than 50 words</div>
+	 						</div>
+	 			</md-input-container>
+
+	 		
+	 			<md-input-container class="md-block">
+	 				<label>Description</label>
+	 					<input name="apiLink" required ng-model="api.link">
+	 						<div ng-messages="addpostForm.apiLink.$error">
+	 							<div ng-message=" required"> This is required.</div>
+	 						</div>
+	 			</md-input-container>
+	 		
+
+	 			<md-input-container class="md-block">
+	 				<label>Tags</label>
+	 					<input name="apiTags" ng-model="api.tags">
+	 						<div ng-messages="addpostForm.description.$error"></div>
+	 			</md-input-container>
+	 			<md-button class="sub_butt md-raised md-warn" ng-click="submitform()">Submit</md-button>	
+
+	</div>
+</section>

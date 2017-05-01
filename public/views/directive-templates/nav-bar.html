@@ -15,11 +15,11 @@
         </div>
         <div hide show-gt-sm flex>
             <md-button class="signupButton" ng-click="loginDialog($event)" ng-if="!postData.loggedOnUser">Login</md-button>
-            <span class="signupButton" ng-click="null" ng-if="postData.loggedOnUser">{{postData.username}}</span>
+            <span class="loggedInUsername" ng-click="null" ng-if="postData.loggedOnUser">{{postData.username}}</span>
             <md-menu ng-if="postData.loggedOnUser" md-position-mode="target-right bottom">
                 <a href="#">
                     &nbsp;
-                    <img class="userProfileImg" ng-click="$mdMenu.open($event)" src="../../images/img1.jpg" height="30px" width="30px">
+                    <img class="userProfileImg" ng-click="$mdMenu.open($event)" src="../../images/profile/profile1.png" height="30px" width="30px">
                 </a>
                 <md-menu-content width="3" >
                     <md-menu-item>

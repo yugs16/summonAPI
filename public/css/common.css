@@ -70,7 +70,6 @@ hr {
 	min-width: 40px;
 	object-fit: cover;
 	border: 1px solid white;
-	/*border-radius: 999px;*/
 	border-radius: 9px;
 }
 .post_author {
@@ -111,6 +110,10 @@ hr {
 	padding: 10px;
 	text-align: center;
 }
+.previewContainer h3 {
+	margin: auto;
+	padding: 5px;
+}
 .voteContainer {
 	padding: 5px 5px 5px 5px;
 }
@@ -138,6 +141,10 @@ hr {
 	margin: auto;
 	margin-top: 0.6em;
 	margin-left: 0.5em;
+}
+.loggedInUsername {
+	vertical-align: super;
+	font-weight: bold;
 }
 
 /*sidenav styling*/
@@ -215,4 +222,11 @@ hr {
 #menuIcon {
 	cursor: pointer;
 	margin-top: auto;
+}
+
+/*media query*/
+@media screen and (max-width: 720px) {
+	.intro_card, .info_card {
+		width: 95%;
+	}
 }

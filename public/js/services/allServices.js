@@ -48,7 +48,24 @@ angular.module('allServices', [])
 					 	'Content-Type': 'application/json;'
 					 }
 				}
-				return $http.post('/api/editvote');
+				return $http.post('/api/editvote', data);
+			}
+		}
+	}])
+
+	.factory('postDetailService', ['$http', '$routeParams', function($http, $routeParams) {
+		return {
+			getPostDetails : function(routeParams) {
+				var config = {
+					headers : {
+						'Content-Type' : 'application/json;'
+					}
+				}
+				return $http.get('/api/details', {
+					params : {
+						_id : routeParams._id
+					}
+				})
 			}
 		}
 	}])

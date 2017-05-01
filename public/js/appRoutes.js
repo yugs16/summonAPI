@@ -9,6 +9,10 @@ angular.module('appRoutes', [])
 			templateUrl: '../views/home.html',
 			controller: 'homeCtrl'
 		})
+		.when('/details/:id', {
+			templateUrl: '../views/post-details.html',
+			controller: 'postDetailCtrl'
+		})
 		.when('/about', {
 			templateUrl: '../views/about.html',
 			controller: 'aboutCtrl'
