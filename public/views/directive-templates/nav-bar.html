@@ -1,4 +1,47 @@
+<style type="text/css">
+.signupButton{
+    margin-right: 5%;
+}
+</style>
 <md-toolbar class="toolbar" md-whiteframe="6px">
+    <h2 class="md-toolbar-tools">
+    	<ng-md-icon 
+    		ng-controller="sideNavCtrl"
+    		id="menuIcon" 
+    		hide-gt-sm
+            show-sm 
+    		ng-click="toogleleft()" 
+    		icon="menu" 
+    		style="fill: blue" 
+    		size="30">
+    	</ng-md-icon>
+        <span class="brand">Summon<strong>API</strong></span><div flex></div>
+        <md-button class="signupButton" ng-click="loginDialog($event)">Login</md-button>
+        <span class="signupButton" ng-click="null" ng-if="userData.loggedOnUser">{{userData.username}}</span>
+        <md-menu ng-if="userData.loggedOnUser" md-position-mode="target-right bottom" hide-sm>
+            <a href="#">
+                &nbsp;
+                <img class="userProfileImg" ng-click="$mdMenu.open($event)" src="../../images/img1.jpg" height="30px" width="30px">
+            </a>
+            <md-menu-content width="3" >
+                <md-menu-item>
+                    <md-button ng-click="null">
+                        View Profile
+                    </md-button>
+                </md-menu-item>
+                <md-menu-item>
+                    <md-button ng-click="null">
+                        Settings
+                    </md-button>
+                </md-menu-item>
+                <md-menu-item>
+                    <md-button ng-click="logout()">
+                        Log Out
+                    </md-button>
+                </md-menu-item>
+            </md-menu-content>
+        </md-menu>
+    </h2>
     <div class="md-toolbar-tools" layout="row">
         <div flex>
         	<ng-md-icon 
