@@ -70,8 +70,7 @@ hr {
 	min-width: 40px;
 	object-fit: cover;
 	border: 1px solid white;
-	border-radius: 999px;
-	/*border-radius: 9px;*/
+	border-radius: 9px;
 }
 .post_author {
 	font-weight: lighter;
