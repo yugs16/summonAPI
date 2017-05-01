@@ -46,12 +46,10 @@ app.set('views', __dirname + '/public/views');
 
 app.use('/js',express.static(__dirname + '/public'));
 
-// app.get('*',function(req,res){
-
-//   	console.log("**came");
-//   	// res.json({});
-//    res.redirect('/');
-// });
+app.get('*',function(req,res){
+//  console.log(req.originalUrl);
+   res.redirect('/');
+});
 
 app.listen(config.port, function (err) {
 	if(err){
