@@ -6,7 +6,6 @@
   "scripts": {
     "test": "server",
     "postinstall": "bower install",
-    "heroku-prebuild": "npm install",
     "start": "node server.js"
   },
   "author": "yugal",
