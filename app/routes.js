@@ -12,15 +12,6 @@ var loggedOnUser =false;
 module.exports=function(app,express){
 	
     var api = express.Router();
-	
-    api.get('/videos*',function(req,res){
-    	console.log("videos--------");
-    	console.log(req.originalUrl);
-    	var split_array = []
-    	split_array = (req.originalUrl).split('/');
-    	console.log(split_array);
-    	res.send({back:'back',array:split_array});
-    });
 
 	api.post('/signin', function(req, res) {
 		console.log(superSecret);
