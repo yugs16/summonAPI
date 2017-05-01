@@ -3,7 +3,6 @@ var database ;
 if(process.env.NODE_ENV === 'development'){
 	console.log("here1");
 	database = 'mongodb://summonapi:MEwCatAykAcAxA1@ds127801.mlab.com:27801/summonapi';	
-	mongodb://<dbuser>:<dbpassword>@ds127801.mlab.com:27801/summonapi
 }
 else if(process.env.NODE_ENV === 'production'){
 	console.log("here2");
