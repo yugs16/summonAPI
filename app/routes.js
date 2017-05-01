@@ -179,12 +179,14 @@ module.exports=function(app,express){
 			};
 			// Post.find({userId:req.body.decoded.userId},function(err,posts){
 			Post.find({},function(err,posts){
-				console.log(posts);
+				//console.log(posts);
 				if(posts === null || posts.length === 0){
 					res.status(200).json(dataToSend);
 				}
 				else{
 					posts.forEach(function(onePost){
+						var flag=false;
+
 						User.findOne({ _id:onePost.userId},function(err,instance){
 							var r = onePost.toObject();
 							r.userInfo = {
@@ -200,6 +202,40 @@ module.exports=function(app,express){
 								res.status(200).json(dataToSend);
 							}
 						})
+
+						// User.findOne({ _id:onePost.userId},function(err,instance){
+						// 	var r = onePost.toObject();
+						// 	console.log(r.votes);
+						// 	r.vote_active=false;
+						// 	r.userInfo = {
+						// 		userId:instance._id,
+						// 		username:instance.username,
+						// 		email:instance.email,
+						// 		user_rating:instance.rating,
+						// 		profile_pic:instance.profile_pic
+						// 	}	
+						// 	var j=0;
+						// 	(r.votes).forEach(function(vote){
+						// 		if(vote.userId === req.user.id){
+						// 			r.vote_active=true;
+						// 			flag = true;
+						// 			break;
+						// 		}
+						// 		j++;
+						// 		if(j === (r.votes).length){
+						// 			flag=true
+						// 			break;
+						// 		}
+						// 	})
+						// 	if(flag)
+						// 	{	
+						// 		i++;
+						// 		dataToSend.posts.push(r);
+						// 	}
+						// 	if(posts.length === i){
+						// 		res.status(200).json(dataToSend);
+						// 	}
+						// })
 					})	
 				}	
 			})
@@ -362,6 +398,46 @@ module.exports=function(app,express){
 				})
 			}
 		}
+	})
+
+	api.get('/details',function(req,res){
+		
+		console.log(req.query);
+
+		if(!req.loggedOnUser){
+			res.json({
+				'redirectUrl':'/login',
+				'loggedOnUser':false
+			});
+		}
+		else{
+			Post.findOne({_id:req.query.postId},function(err,post){
+				console.log(post);
+				//dataToSend = posts;
+				var dataToSend={
+					loggedOnUser:true,
+					post:post
+				};
+				if(post === null || post.length === 0){
+					console.log("came in null");
+					res.status(200).json(dataToSend);
+				}
+				else{
+					console.log("came in else again");
+					User.findOne({ _id:post.userId},function(err,instance){
+						dataToSend.userInfo = {
+							userId:instance._id,
+							username:instance.username,
+							email:instance.email,
+							user_rating:instance.rating,
+							profile_pic:instance.profile_pic
+						}
+						res.send(dataToSend);
+					})					
+				}
+			});	
+		}
+		
 	})
   return api ;
 }
