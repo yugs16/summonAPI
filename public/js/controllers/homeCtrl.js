@@ -85,9 +85,9 @@
 			}
 
 			// redirect to detailed page
-			$scope.details = function(data) {
-				console.log(data._id);
-				$location.path('/details/' + data._id);
+			$scope.details = function(id) {
+				console.log($routeParams);
+				$location.path('/details/' + id);
 			}
 
 			// loginDialog controller
