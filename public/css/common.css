@@ -3,6 +3,7 @@
 /*HTML TAG STYLING*/
 body {
 	background: #E0E0E0;
+	font-family: 'Roboto', sans-serif;
 }
 *:focus {
 	outline: none;
@@ -62,15 +63,15 @@ hr {
 	font-weight: bold;
 }
 .post_title, .post_title:hover {
-	color: blue;
+	color: grey;
 	cursor: pointer;
+	font-weight: bolder;
 }
-.postMakerImg {
-	min-height: 40px;
-	min-width: 40px;
+.userImg {
+	height: 40px;
 	object-fit: cover;
 	border: 1px solid white;
-	border-radius: 9px;
+	border-radius: 5px;
 }
 .post_author {
 	font-weight: lighter;
@@ -100,6 +101,7 @@ hr {
 }
 .api_link {
 	text-decoration: none;
+	color: orangered;
 }
 .post_desc {
 	color: grey;
@@ -107,12 +109,15 @@ hr {
 	max-height: 100px;
 }
 .previewContainer {
-	padding: 10px;
 	text-align: center;
 }
 .previewContainer h3 {
 	margin: auto;
 	padding: 5px;
+}
+.previewContainer img {
+	height: 100%;
+	width: 100%;
 }
 .voteContainer {
 	padding: 5px 5px 5px 5px;
@@ -132,7 +137,7 @@ hr {
 .userProfileImg {
 	background: -webkit-linear-gradient(82deg, #2196F3, #1976D2) !important;
 	border: 1.5px solid white;
-	border-radius: 9px;
+	border-radius: 999px;
 }
 .brand {
 	cursor: pointer;
@@ -226,7 +231,7 @@ hr {
 
 /*media query*/
 @media screen and (max-width: 720px) {
-	.intro_card, .info_card {
+	.intro_card, .info_card, .postDetail_infoCard {
 		width: 95%;
 	}
 }

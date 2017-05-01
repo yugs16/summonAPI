@@ -1,6 +1,32 @@
-
+.postDetail_infoCard {
+	margin: 10px auto;
+	width: 70%;
+}
 .postDetail_postMakerImg {
 	height: 150px;
 	width: 150px;
-	border-radius: 999px;
+	border-radius: 9px;
+}
+.postDetail_headerbox {
+	padding: 10px;
+}
+.postDetail_headerbox h1, .postDetail_headerbox h2{
+	margin: 5px;
+	font-size: 30px;
+	font-weight: bolder;
+}
+.postDetail_headerbox h2{
+	font-size: 20px;
+}
+.postDetail_contentbox p {
+	color: darkgrey;
+	font-weight: bolder;
+}
+.postDetail_posttypebox, .postDetail_posttypebox:hover{
+	cursor: pointer;
+	position: relative;
+	top: -100px;
+}
+.postDetail_posttypebox ng-md-icon {
+	float: right;
 }
