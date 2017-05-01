@@ -1,3 +1,37 @@
 <section>
-	<h1>Details goes here....</h1>
+	<md-card class="">
+		<md-card-header>
+			<img class="postDetail_postMakerImg" src="../images/profile/profile1.png">
+			<md-card-header-text>
+				<h2 class="md-title">Header</h2>
+				<h3 class="md-subhead">Sub Header</h3>
+			</md-card-header-text>
+		</md-card-header>
+		<div layout="row" layout-xs="column">
+			<div flex flex-order-xs="1">
+				<md-card-title>
+					<md-card-title-text>
+					<span class="md-headline">TITLE</span>
+					<span class="md-subhead">
+						<a href="{{i.api_link}}" class="" target="_blank">LINK</a>
+					</span>
+					</md-card-title-text>
+				</md-card-title>
+				<md-card-content>
+					<p class="">
+						DESCRIPTION
+					</p>
+					<div class="chip_box">
+						<span class="chip" ng-repeat="tags in i.tags">
+							TAGS
+						</span>
+					</div>
+				</md-card-content>
+			</div>
+			<div flex flex-order-xs="-1" class="previewContainer">
+				<h3>Preview</h3>
+				<img src="../images/aboutImg.png" height="200px" width="200px">
+			</div>
+		</div>
+	</md-card>
 </section>

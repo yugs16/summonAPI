@@ -65,7 +65,7 @@ hr {
 	color: blue;
 	cursor: pointer;
 }
-.userImg {
+.postMakerImg {
 	min-height: 40px;
 	min-width: 40px;
 	object-fit: cover;
