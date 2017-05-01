@@ -56,7 +56,7 @@
 						"postId" : data._id,
 						"vote" : true
 					}
-					voteService.getVote()
+					voteService.getVote(voteData)
 						.then(function(resp) {
 							console.log(resp);
 						}, function errorCallback(err) {

@@ -48,7 +48,7 @@ angular.module('allServices', [])
 					 	'Content-Type': 'application/json;'
 					 }
 				}
-				return $http.post('/api/editvote');
+				return $http.post('/api/editvote', data);
 			}
 		}
 	}])
