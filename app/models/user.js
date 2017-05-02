@@ -16,7 +16,7 @@ function getRandom(min, max) {
 var user=new mongoose.Schema({
 	username:{type:'String',default:''},
 	email:{type:'String',default:''},
-	profile_pic:{type:'String',default:'profile'+getRandom(0,4)+'.png'},
+	profile_pic:{type:'String',default:'profile'+getRandom(1,4)+'.png'},
 	password:{type:'String',default:''},
 	createdAt:{type:'Date',default:Date.now},
 	interests:["String"],

@@ -165,6 +165,7 @@ module.exports=function(app,express){
 			var dataToSend = {
 				username:req.body.decoded.username,
 				email:req.body.decoded.email,
+				profile_pic:req.user.profile_pic,
 				loggedOnUser:true,
 				posts:[],
 			}
