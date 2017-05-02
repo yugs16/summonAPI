@@ -19,13 +19,14 @@
 			}else{
 				console.log('post data');
 
-				// sending request to server if user is not nogged in
+				// sending request to server if user is not logged in
 				userDataService.getData()
 					.then(function(resp) {
 						$scope.postData = resp.data;
 
 						// data sharing among controllers 
 						$rootScope.$broadcast('senddown', resp.data);
+						
 						console.log($scope.postData);
 					}, function errorCallback(err) {
 						console.log(err);

@@ -13,11 +13,11 @@
 					}else{
 						signupService.userSignup(data)
 							.then(function(data, status, headers, config) {
-								console.log(data);
+								console.log(data.data);
 								$location.path('/login-account');
 							}, function errorCallback(err) {
 								console.log(err);
-								alert(err.data.msg);
+								alert(err.data);
 							})
 					}
 			}

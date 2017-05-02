@@ -1,3 +1,38 @@
 <section>
-	<h1>Details goes here....</h1>
+	<md-card class="postDetail_infoCard">
+		<md-card-header>
+			<img class="postDetail_postMakerImg" src="../images/profile/profile1.png">
+			<md-card-header-text class="postDetail_headerbox">
+				<h1 class="md-title">{{detailedData.userInfo.username}}</h1>
+				<h2 class="md-subhead">{{detailedData.userInfo.email}}</h2>
+				<span ng-if="private_post" class="postDetail_posttypebox">
+					<!-- <div class="postDetail_tooltip">this is private post</div> -->
+					<ng-md-icon class="" icon="lock" style="fill: black" size="20"></ng-md-icon>
+				</span>
+				<span ng-if="public_post" class="postDetail_posttypebox">
+					<!-- <div class="postDetail_tooltip">this is private post</div> -->
+					<ng-md-icon class="" icon="lock_open" style="fill: black" size="20"></ng-md-icon>
+				</span>
+			</md-card-header-text>
+		</md-card-header>
+		<md-card-title>
+			<md-card-title-text class="postDetail_titlebox">
+			<span class="md-headline">{{detailedData.post.title}}</span>
+			<span class="md-subhead">
+				<a href="{{i.api_link}}" class="" target="_blank">{{detailedData.post.api_link}}</a>
+			</span>
+			</md-card-title-text>
+		</md-card-title>
+		<md-card-content class="postDetail_contentbox">
+			<p class="">
+				DESCRIPTION :<br/>
+				{{detailedData.post.description}}
+			</p>
+			<div class="chip_box">
+				<span class="chip" ng-repeat="tags in i.tags">
+					TAGS
+				</span>
+			</div>
+		</md-card-content>
+	</md-card>
 </section>
