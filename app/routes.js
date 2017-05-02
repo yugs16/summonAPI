@@ -223,9 +223,10 @@ module.exports=function(app,express){
 			};
 			Post.find({haveTrendingAccess:true},function(err,posts){
 				if(err) throw err;
-				console.log("in query")
-				console.log(posts);
+				//console.log("in query")
+				//console.log(posts);
 				if(posts === null || posts.length<=0){
+					console.log(posts);
 					console.log("Post is null");
 					res.status(200).json(dataToSend);
 				}
