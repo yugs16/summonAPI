@@ -2,7 +2,7 @@
 	'use strict';
 	angular.module('addPostCtrl', [])
 
-		.controller('addPostCtrl', ['$scope', '$rootScope', 'addPostService', function($scope, $rootScope, $http, addPostService) {
+		.controller('addPostCtrl', ['addPostService','$scope',function( addPostService,$scope,$http) {
 			$scope.submitform=function(){
 				var data={	
 					"title" : $scope.apiName,
