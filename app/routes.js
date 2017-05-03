@@ -165,9 +165,10 @@ module.exports=function(app,express){
 			var dataToSend = {
 				username:req.body.decoded.username,
 				email:req.body.decoded.email,
+				profile_pic:req.user.profile_pic,
 				loggedOnUser:true,
 				posts:[],
-			};
+			}
 			// Post.find({userId:req.body.decoded.userId},function(err,posts){
 			Post.find({},function(err,posts){
 				//console.log(posts);
@@ -222,7 +223,11 @@ module.exports=function(app,express){
 				posts:[]
 			};
 			Post.find({haveTrendingAccess:true},function(err,posts){
-				if(posts === null || posts.length<0){
+				if(err) throw err;
+				//console.log("in query")
+				//console.log(posts);
+				if(posts === null || posts.length<=0){
+					console.log(posts);
 					console.log("Post is null");
 					res.status(200).json(dataToSend);
 				}
@@ -245,7 +250,6 @@ module.exports=function(app,express){
 						})
 					})					
 				}
-
 			});	
 		}
 	});

@@ -13,6 +13,7 @@ mongoose.connect(config.database,function(err){
 		console.log(err);
 	}
 	else{
+		//CREATE DATABASE IF NOT EXISTS summonapi;
 		console.log('Connected to the database');
 	}
 });
