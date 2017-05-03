@@ -56,7 +56,7 @@ angular.module('allServices', [])
 	.factory('postDetailService', ['$http', '$routeParams', function($http, $routeParams) {
 		return {
 			getPostDetails : function(routeParams) {
-				console.log(routeParams.id);
+				console.log(routeParams);
 				var config = {
 					headers : {
 						'Content-Type' : 'application/json;'
@@ -67,6 +67,21 @@ angular.module('allServices', [])
 						postId : routeParams.id
 					}
 				})
+			}
+		}
+	}])
+
+	.factory('addPostService', ['$http', function($http) {
+		return {
+			addPostDetails : function(data) {
+				console.log(data);
+				var config = {
+					headers : {
+						'Content-Type' : 'application/json;'
+					}
+				}
+				console.log($http.post('/api/addPost', data));
+				return $http.post('/api/addPost', data);
 			}
 		}
 	}])

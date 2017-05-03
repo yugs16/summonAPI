@@ -261,7 +261,7 @@ module.exports=function(app,express){
 				//console.log(user);
 				if(err) throw err;
 				if(user){
-					//console.log(req.body);
+					console.log(req.body);
 					var post = new Post(req.body);
 					post.userId = user._id;
 					post.createdAt = Date.now();
