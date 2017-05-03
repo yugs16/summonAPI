@@ -9,10 +9,10 @@
 				userDataService.getData()
 					.then(function(resp) {
 						$rootScope.postData = resp.data;
-
+						
 						//data sharing among controllers 
 						$rootScope.$broadcast('senddown', resp.data);
-						console.log(resp);
+						console.log(resp.data);
 					}, function errorCallback(err) {
 						console.log(err);
 					});
@@ -59,7 +59,21 @@
 					}
 					voteService.getVote(voteData)
 						.then(function(resp) {
-							console.log(resp);
+							$scope.upVote = resp.data.up_vote_cnt;
+							$scope.postId = resp.data.postId;
+							if (resp.data.vote != true) {
+								$scope.voteUp == $scope.voteUp - 1;
+							}else {
+								$scope.voteUp == $scope.voteUp + 1;
+							}
+							$scope.showOnClickLike = function(id) {
+								if (id != $scope.postId) {
+									return true;
+								}else{
+									return false;
+								}
+							}
+							console.log(resp.data);
 						}, function errorCallback(err) {
 							console.log('error occured', err);
 						})
@@ -71,12 +85,12 @@
 			$scope.voteDown = function(data) {
 				if ($cookies.get('connect_auth')) {
 					var voteData = {
-						"postId" : data.votes[0].userId,
+						"postId" : data._id,
 						"vote" : false
 					}
 					voteService.getVote()
 						.then(function(resp) {
-							console.log(resp);
+							console.log(resp.data);
 						}, function errorCallback(err) {
 							console.log('error occured', err);
 						})

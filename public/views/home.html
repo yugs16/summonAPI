@@ -48,14 +48,18 @@
 				</div>
 			</div>
 			
-			<hr />
+			<!-- <hr /> -->
 			<md-card-actions layout="row" layout-align="start center">
 				<div class="voteContainer" flex>
 					<ng-md-icon ng-click="voteUp(i)" icon="thumb_up" style="fill: grey" size="17"></ng-md-icon>
 					&nbsp; &nbsp;
-					<span>{{i.vote_cnt}}</span>
+					<span ng-if="!upVote">{{i.up_vote_cnt}}</span>
+					<span ng-if="upVote && i._id === postId" id="i._id">{{upVote}}</span>
+					<span ng-if="showOnClickLike(i._id)">{{i.up_vote_cnt}}</span>
 					&nbsp; &nbsp;
 					<ng-md-icon ng-click="voteDown(i)" icon="thumb_down" style="fill: grey" size="17"></ng-md-icon>
+					&nbsp; &nbsp;
+					<span>{{i.down_vote_cnt}}</span>
 				</div>
 				<md-button ng-click="details(i._id)" class="md-raised md-warn postDetailBtn" aria-label="postDetailBtn">Details</md-button>
 			</md-card-actions>
