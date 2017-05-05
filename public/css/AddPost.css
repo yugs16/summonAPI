@@ -1,9 +1,13 @@
+h2{
+	padding: 5% 0 0 5%;
+}
 .addpostsection
 {
 	width: 75%;
 	margin:10% auto;
 }
-
-h2{
-	padding: 5% 0 0 5%;
+.addPostTitle {
+	margin: 10px auto 10px auto;
+    padding: 5px;
+    text-align: center;
 }

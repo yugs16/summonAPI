@@ -1,10 +1,6 @@
-<h2>Add a new Post!</h2>
-
-<section class="addpostsection"  md-whiteframe="8px">
-
-	<div ng-controller="addPostCtrl" ng-cloak class="md-inline-form">
-
-
+<section class="addpostsection">
+	<h2 class="addPostTitle">Add a new Post!</h2>
+	<div ng-controller="addPostCtrl" ng-cloak class="md-inline-form"   md-whiteframe="8px">
 	 	<md-content layout-padding>
 	 		<form name="addpostForm"></form>
 	 			<md-input-container class="md-block">
@@ -39,6 +35,6 @@
 	 						<div ng-messages="addpostForm.apiTags.$error"></div>
 	 			</md-input-container>
 	 			<md-button class="sub_butt md-raised md-warn" ng-click="submitform()">Submit</md-button>	
-
+	 	</md-content>
 	</div>
 </section>
