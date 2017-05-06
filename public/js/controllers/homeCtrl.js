@@ -54,18 +54,14 @@
 			$scope.voteUp = function(data) {
 				if ($cookies.get('connect_auth')) {
 					var voteData = {
-						"postId" : data._id,
-						"vote" : true
-					}
+							"postId" : data._id,
+							"vote" : true,
+							"vote_active" : data.userInfo.vote_active
+						}
 					voteService.getVote(voteData)
 						.then(function(resp) {
 							$scope.upVote = resp.data.up_vote_cnt;
 							$scope.postId = resp.data.postId;
-							if (resp.data.vote != true) {
-								$scope.voteUp == $scope.voteUp - 1;
-							}else {
-								$scope.voteUp == $scope.voteUp + 1;
-							}
 							$scope.showOnClickLike = function(id) {
 								if (id != $scope.postId) {
 									return true;
