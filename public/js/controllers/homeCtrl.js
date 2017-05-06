@@ -52,6 +52,7 @@
 			// voting functionality
 			// voteUp
 			$scope.voteUp = function(data) {
+				
 				if ($cookies.get('connect_auth')) {
 					var voteData = {
 							"postId" : data._id,
