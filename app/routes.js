@@ -400,15 +400,15 @@ module.exports=function(app,express){
 										}
 									}
 								}
-								instance.update(update,function(err,updatedInstance){
-									console.log(updatedInstance);
-									if(updatedInstance.ok === 1 && updatedInstance.nModified === 1){
-										res.status(200).json(dataToSend);
-									}
-									else
-										res.send({status:400,postId:instance._id})
-								});
 							}
+							instance.update(update,function(err,updatedInstance){
+								console.log(updatedInstance);
+								if(updatedInstance.ok === 1 && updatedInstance.nModified === 1){
+									res.status(200).json(dataToSend);
+								}
+								else
+									res.send({status:400,postId:instance._id})
+							});
 						}
 					})	
 				})
