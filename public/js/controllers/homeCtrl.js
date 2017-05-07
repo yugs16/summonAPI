@@ -9,10 +9,10 @@
 				userDataService.getData()
 					.then(function(resp) {
 						$rootScope.postData = resp.data;
-
+						
 						//data sharing among controllers 
 						$rootScope.$broadcast('senddown', resp.data);
-						console.log(resp);
+						console.log(resp.data);
 					}, function errorCallback(err) {
 						console.log(err);
 					});
@@ -52,14 +52,35 @@
 			// voting functionality
 			// voteUp
 			$scope.voteUp = function(data) {
+				
 				if ($cookies.get('connect_auth')) {
-					var voteData = {
-						"postId" : data._id,
-						"vote" : true
+					if ($cookies.get('temp_vote_active')) {
+						var voteData = {
+							"postId" : data._id,
+							"vote" : true,
+							"vote_active" : $cookies.get('temp_vote_active')
+						}
+					} else {
+						var voteData = {
+								"postId" : data._id,
+								"vote" : true,
+								"vote_active" : data.userInfo.vote_active
+							}
 					}
 					voteService.getVote(voteData)
 						.then(function(resp) {
-							console.log(resp);
+							$cookies.put('temp_vote_active', resp.data.vote_active);
+							$scope.vote = resp.data.vote_active;
+							$scope.upVote = resp.data.up_vote_cnt;
+							$scope.postId = resp.data.postId;
+							$scope.showOnClickLike = function(id) {
+								if (id != $scope.postId) {
+									return true;
+								}else{
+									return false;
+								}
+							}
+							console.log(resp.data);
 						}, function errorCallback(err) {
 							console.log('error occured', err);
 						})
@@ -71,12 +92,12 @@
 			$scope.voteDown = function(data) {
 				if ($cookies.get('connect_auth')) {
 					var voteData = {
-						"postId" : data.votes[0].userId,
+						"postId" : data._id,
 						"vote" : false
 					}
 					voteService.getVote()
 						.then(function(resp) {
-							console.log(resp);
+							console.log(resp.data);
 						}, function errorCallback(err) {
 							console.log('error occured', err);
 						})

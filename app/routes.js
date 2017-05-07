@@ -322,29 +322,55 @@ module.exports=function(app,express){
 				res.json({msg:"failure",info:"Check for postId or is vote there."});
 			}
 			else{
-				
+				console.log(req.body);
+
 				User.findOne({_id:req.body.decoded.userId}).exec(function(err,user){
 					Post.findOne({_id:req.body.postId},function(err,instance){
 						var vote_cnt=0;
 						var vote_update_in;
+						var new_vote_active=0;
 						if(!instance || req.body.vote == null){
 							res.json({msg:"No Post to Vote"})
 						}
 						else{
 							if(req.body.vote === true || req.body.vote === "true"){
 								vote_update_in = "up_vote_cnt";
-								vote_cnt=instance.up_vote_cnt+1;
-								user.contributions_array.upvotes = user.contributions_array.upvotes +1;
+								if(req.body.vote_active == 1)
+								{
+									console.log("already upvote");
+									vote_cnt = instance.up_vote_cnt-1;
+									user.contributions_array.upvotes = user.contributions_array.upvotes -1;
+									user.contributions_cnt = user.contributions_cnt-1;
+									user.contributions_points = user.contributions_points-1;	
+								}
+								else
+								{
+									vote_cnt = instance.up_vote_cnt+1;
+									user.contributions_array.upvotes = user.contributions_array.upvotes +1;
+									user.contributions_cnt = user.contributions_cnt+1;
+									user.contributions_points = user.contributions_points+1;	
+									new_vote_active = 1;
+								}	
 								instance.up_vote_cnt=vote_cnt;
 							}
 							else{
 								vote_update_in = "down_vote_cnt";
-								vote_cnt=instance.down_vote_cnt+1;
-								user.contributions_array.downvotes = user.contributions_array.downvotes + 1;
+								if(req.body.vote_active == -1)
+								{
+									vote_cnt = instance.down_vote_cnt-1;
+									user.contributions_array.upvotes = user.contributions_array.upvotes -1;
+									user.contributions_cnt = user.contributions_cnt-1;
+									user.contributions_points = user.contributions_points-1;
+								}	
+								else
+								{	vote_cnt = instance.down_vote_cnt+1;
+									user.contributions_array.downvotes = user.contributions_array.downvotes + 1;	
+									user.contributions_cnt = user.contributions_cnt+1;
+									user.contributions_points = user.contributions_points+1;	
+									new_vote_active = 1;
+								}
 								instance.down_vote_cnt=vote_cnt;
 							}
-							user.contributions_cnt = user.contributions_cnt+1;
-							user.contributions_points = user.contributions_points+1;	
 							user.save(function(err,updatedUser){
 								//console.log(updatedUser);
 							})
@@ -353,23 +379,36 @@ module.exports=function(app,express){
 
 							});
 
-							instance.update({$push:{
-								'votes':{
-									vote_user_rating:req.user.user_rating,
-									vote:req.body.vote,
-									userId:req.body.decoded.userId
+							var dataToSend = {
+								postId:instance._id,
+								vote:req.body.vote,
+								up_vote_cnt:vote_cnt,
+								vote_active:new_vote_active,
+								status:200
+							};
+
+							var update;
+
+							if(req.body.vote_active === 1 || req.body.vote_activ === -1){
+								update = { $pull: { 'votes': { userId: req.user._id }} }
+							}
+							else{
+								update = { $push:{	'votes':{
+											vote_user_rating:req.user.user_rating,
+											vote:req.body.vote,
+											userId:req.body.decoded.userId
+										}
+									}
 								}
-							}},function(err,updatedInstance){
+							}
+							instance.update(update,function(err,updatedInstance){
 								console.log(updatedInstance);
 								if(updatedInstance.ok === 1 && updatedInstance.nModified === 1){
-									if(req.body.vote === true || req.body.vote === "true")
-										res.status(200).json({status:200,postId:instance._id,vote:req.body.vote,up_vote_cnt:vote_cnt});
-									else
-										res.status(200).json({status:200,postId:instance._id,vote:req.body.vote,down_vote_cnt:vote_cnt});
+									res.status(200).json(dataToSend);
 								}
 								else
 									res.send({status:400,postId:instance._id})
-							})
+							});
 						}
 					})	
 				})
