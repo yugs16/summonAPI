@@ -51,8 +51,7 @@
 
 			// voting functionality
 			// voteUp
-			$scope.voteUp = function(data) {
-				
+			$scope.voteUp = function(data, post_id) {
 				if ($cookies.get('connect_auth')) {
 					if ($cookies.get('temp_vote_active')) {
 						var voteData = {
@@ -91,12 +90,33 @@
 			// voteDown
 			$scope.voteDown = function(data) {
 				if ($cookies.get('connect_auth')) {
-					var voteData = {
-						"postId" : data._id,
-						"vote" : false
+					if ($cookies.get('temp_downvote_active')) {
+						var voteData = {
+							"postId" : data._id,
+							"vote" : false,
+							"vote_active" : $cookies.get('temp_downvote_active')
+						}
+					}else {
+						var voteData = {
+							"postId" : data._id,
+							"vote" : false,
+							"vote_active" : data.userInfo.vote_active
+						}
 					}
-					voteService.getVote()
+					voteService.getVote(voteData)
 						.then(function(resp) {
+							$cookies.put('temp_downvote_active', resp.data.vote_active);
+							$scope.vote = resp.data.vote_active;
+							$scope.downVote = resp.data.down_vote_cnt;
+							console.log($scope.downVote);
+							$scope.postId = resp.data.postId;
+							$scope.showOnClickDisLike = function(id) {
+								if (id != $scope.postId) {
+									return true;
+								}else{
+									return false;
+								}
+							}
 							console.log(resp.data);
 						}, function errorCallback(err) {
 							console.log('error occured', err);

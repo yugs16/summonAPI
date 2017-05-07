@@ -12,32 +12,32 @@
 	</div>
 	<div flex>
 		<!--info card-->
-		<md-card class="info_card" ng-repeat="i in postData.posts">
+		<md-card class="info_card" ng-repeat="(key, value) in postData.posts" id="post{{key}}">
 			<div layout="row" layout-xs="column">
 				<div flex flex-order-xs="1">
 					<md-card-header class="info_card_headerbox">
 						<md-card-avatar>
-							<img src="../images/profile/{{i.userInfo.profile_pic}}" class="userImg" />
+							<img src="../images/profile/{{value.userInfo.profile_pic}}" class="userImg" />
 						</md-card-avatar>
 						<md-card-header-text>
-							<span class="md-title userName">{{i.userInfo.username | uppercase}}</span>
-							<span class="md-subhead">{{i.createdAt}}</span>
+							<span class="md-title userName">{{value.userInfo.username | uppercase}}</span>
+							<span class="md-subhead">{{value.createdAt}}</span>
 						</md-card-header-text>
 					</md-card-header>
 					<md-card-title class="info_card_titlebox">
 						<md-card-title-text>
-						<span class="md-headline post_title">{{i.title}}</span>
+						<span class="md-headline post_title">{{value.title}}</span>
 						<span class="api_linkbox">
-							<a href="{{i.api_link}}" class="api_link" target="_blank">{{i.api_link}}</a>
+							<a href="{{value.api_link}}" class="api_link" target="_blank">{{value.api_link}}</a>
 						</span>
 						</md-card-title-text>
 					</md-card-title>
 					<md-card-content>
 						<p class="post_desc">
-							{{i.description}}
+							{{value.description}}
 						</p>
 						<div class="chip_box">
-							<span class="chip" ng-repeat="tags in i.tags">
+							<span class="chip" ng-repeat="tags in value.tags">
 								{{tags}}
 							</span>
 						</div>
@@ -51,17 +51,19 @@
 			<!-- <hr /> -->
 			<md-card-actions layout="row" layout-align="start center">
 				<div class="voteContainer" flex>
-					<ng-md-icon ng-click="voteUp(i)" icon="thumb_up" style="fill: grey" size="17"></ng-md-icon>
+					<ng-md-icon ng-click="voteUp(value, key)" icon="thumb_up" style="fill: grey" size="17"></ng-md-icon>
 					&nbsp; &nbsp;
-					<span ng-if="!upVote">{{i.up_vote_cnt}}</span>
-					<span ng-if="upVote && i._id === postId" id="i._id">{{upVote}}</span>
-					<span ng-if="showOnClickLike(i._id)">{{i.up_vote_cnt}}</span>
+					<span ng-if="!upVote">{{value.up_vote_cnt}}</span>
+					<span ng-if="upVote && value._id === postId" id="value._id">{{upVote}}</span>
+					<span ng-if="showOnClickLike(value._id)">{{value.up_vote_cnt}}</span>
 					&nbsp; &nbsp;
-					<ng-md-icon ng-click="voteDown(i)" icon="thumb_down" style="fill: grey" size="17"></ng-md-icon>
+					<ng-md-icon ng-click="voteDown(value)" icon="thumb_down" style="fill: grey" size="17"></ng-md-icon>
 					&nbsp; &nbsp;
-					<span ng-if="upVote">{{i.down_vote_cnt}}</span>
+					<span ng-if="!downVote">{{value.down_vote_cnt}}</span>
+					<span ng-if="downVote && value._id === postId"  id="value._id">{{downVote}}</span>
+					<span ng-if="showOnClickDisLike(value._id)">{{value.down_vote_cnt}}</span>
 				</div>
-				<md-button ng-click="details(i._id)" class="md-raised md-warn postDetailBtn" aria-label="postDetailBtn">Details</md-button>
+				<md-button ng-click="details(value._id)" class="md-raised md-warn postDetailBtn" aria-label="postDetailBtn">Details</md-button>
 			</md-card-actions>
 		</md-card>
 	</div>

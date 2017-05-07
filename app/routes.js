@@ -367,7 +367,7 @@ module.exports=function(app,express){
 									user.contributions_array.downvotes = user.contributions_array.downvotes + 1;	
 									user.contributions_cnt = user.contributions_cnt+1;
 									user.contributions_points = user.contributions_points+1;	
-									new_vote_active = 1;
+									new_vote_active = -1;
 								}
 								instance.down_vote_cnt=vote_cnt;
 							}
@@ -382,10 +382,15 @@ module.exports=function(app,express){
 							var dataToSend = {
 								postId:instance._id,
 								vote:req.body.vote,
-								up_vote_cnt:vote_cnt,
 								vote_active:new_vote_active,
 								status:200
 							};
+							if(req.body.vote){
+								dataToSend.up_vote_cnt=vote_cnt;
+							}
+							else{
+								dataToSend.down_vote_cnt=vote_cnt;
+							}
 
 							var update;
 
