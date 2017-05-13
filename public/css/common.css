@@ -222,6 +222,16 @@ hr {
 	background-image: url('../images/sidenavImg.jpg');
 	min-height: 6.4em;
 }
+.spinner {
+	min-width: 50px;
+	padding: 5px;
+	background: white;
+	border-radius: 999px;
+	-webkit-box-shadow: none;
+	-ms-box-shadow: none;
+	box-shadow: none;
+	opacity: 1 !important;
+}
 
 /*ID STYLING*/
 #menuIcon {

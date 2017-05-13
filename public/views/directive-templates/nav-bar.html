@@ -1,5 +1,5 @@
 <md-toolbar class="toolbar" md-whiteframe="6px">
-    <div class="md-toolbar-tools" layout="row">
+    <div class="md-toolbar-tools" layout="row" layout-flex>
         <div flex>
         	<ng-md-icon 
         		ng-controller="sideNavCtrl"
@@ -13,6 +13,7 @@
         	</ng-md-icon>
             <span class="brand">Summon<strong>API</strong></span>
         </div>
+        <div flex></div>
         <div hide show-gt-sm flex>
             <md-button class="signupButton" ng-click="loginDialog($event)" ng-if="!postData.loggedOnUser">Login</md-button>
             <span class="loggedInUsername" ng-click="null" ng-if="postData.loggedOnUser">{{postData.username}}</span>

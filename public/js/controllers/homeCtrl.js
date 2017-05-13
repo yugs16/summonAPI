@@ -3,6 +3,14 @@
 	angular.module('homeCtrl', [])
 		.controller('homeCtrl', ['$scope', '$rootScope', '$mdDialog', '$location', '$window', '$cookies', '$mdSidenav', '$routeParams', 'userDataService', 'voteService', function($scope, $rootScope, $mdDialog, $location, $window, $cookies, $mdSidenav, $routeParams, userDataService, voteService) {
 
+			// start spinner
+			$scope.loaded = false;
+			$mdDialog.show({
+				targetEvent: event,
+				clickOutsideToClose:false,
+				templateUrl: '../views/spinnerDialog.html'
+			});
+
 			// sending get request to server if user is logged in
 			if ($cookies.get('connect_auth')) {
 				console.log('user data : ');
@@ -15,7 +23,11 @@
 						console.log(resp.data);
 					}, function errorCallback(err) {
 						console.log(err);
-					});
+					})
+					.finally(function() {
+						$scope.loaded = true;
+						$mdDialog.hide('.spinner');
+					})
 			}else{
 				console.log('post data');
 
@@ -30,7 +42,11 @@
 						console.log($scope.postData);
 					}, function errorCallback(err) {
 						console.log(err);
-					});
+					})
+					.finally(function() {
+						$scope.loaded = true;
+						$mdDialog.hide('.spinner');
+					})
 			}
 
 			$scope.loginDialog = function(ev) {

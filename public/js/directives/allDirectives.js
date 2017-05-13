@@ -20,3 +20,9 @@ angular.module('allDirectives', [])
 			templateUrl: '../views/directive-templates/hidden-side-nav.html'
 		}
 	})
+	.directive('spinnerDialog', function() {
+		return {
+			restrict: 'E',
+			templateUrl: '../views/directive-templates/spinner.html'
+		}
+	})
