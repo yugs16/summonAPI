@@ -13,8 +13,7 @@
         	</ng-md-icon>
             <span class="brand">Summon<strong>API</strong></span>
         </div>
-        <div flex></div>
-        <div hide show-gt-sm flex>
+        <div hide show-gt-sm flex style="text-align: center;">
             <md-button class="signupButton" ng-click="loginDialog($event)" ng-if="!postData.loggedOnUser">Login</md-button>
             <span class="loggedInUsername" ng-click="null" ng-if="postData.loggedOnUser">{{postData.username}}</span>
             <md-menu ng-if="postData.loggedOnUser" md-position-mode="target-right bottom">
