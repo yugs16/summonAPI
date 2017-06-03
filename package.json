@@ -14,23 +14,21 @@
     "type": "git",
     "url": "git://github.com/lovingyugs/summonAPI.git"
   },
-  "engines": {
-    "node": "6.10.2"
-  },
+  "engines": {},
   "dependencies": {
-    "body-parser": "~1.16.1",
-    "bower": "^1.8.0",
-    "cookie": "~0.3.1",
+    "bcrypt": "^1.0.2",
+    "bcrypt-nodejs": "0.0.3",
+    "body-parser": "^1.17.2",
+    "cookie": "^0.3.1",
     "cookie-parser": "^1.4.3",
-    "express": "^4.15.2",
-    "install": "^0.8.8",
-    "jsonwebtoken": "^7.3.0",
-    "method-override": "~2.3.7",
-    "mongoose": "~4.8.3",
-    "morgan": "^1.8.1",
+    "express": "^4.15.3",
+    "jsonwebtoken": "^7.4.1",
+    "method-override": "^2.3.9",
+    "mongoose": "^4.10.4",
+    "morgan": "^1.8.2",
     "ng-cookies": "^1.0.2",
-    "node-autho": "0.0.6",
+    "node-gyp": "^3.6.2",
     "nodemon": "^1.11.0",
-    "npm": "^4.4.4"
+    "rebuild": "^0.1.2"
   }
 }

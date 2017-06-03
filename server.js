@@ -1,21 +1,19 @@
-
 var express = require('express');
 var app = express(),
-	config=require('./config'),
-	mongoose=require('mongoose');
-	bodyParser=require('body-parser'),
-	morgan   = require('morgan'),
-	cookieParser = require('cookie-parser');
+  config = require('./config'),
+  mongoose = require('mongoose'),
+  bodyParser = require('body-parser'),
+  morgan = require('morgan'),
+  cookieParser = require('cookie-parser');
 
-mongoose.connect(config.database,function(err){
-	if(err){
-        console.log("error connecting")
-		console.log(err);
-	}
-	else{
-		//CREATE DATABASE IF NOT EXISTS summonapi;
-		console.log('Connected to the database');
-	}
+mongoose.connect(config.database, function (err) {
+  if (err) {
+    console.log("error connecting")
+    console.log(err);
+  } else {
+    //CREATE DATABASE IF NOT EXISTS summonapi;
+    console.log('Connected to the database');
+  }
 });
 
 // app.set('superSecret', config.secret);
@@ -27,7 +25,7 @@ mongoose.connect(config.database,function(err){
 
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({
-	extended: true
+  extended: true
 }));
 
 app.use(bodyParser.json()); // parse application/json
@@ -39,26 +37,25 @@ app.use(bodyParser.json());
 
 app.use(morgan('dev'));
 
-var api=require('./app/routes')(app,express);
-app.use('/api',api);
+var api = require('./app/routes')(app, express);
+app.use('/api', api);
 
 app.use(express.static(__dirname + '/public'));
 app.set('views', __dirname + '/public/views');
 
-app.use('/js',express.static(__dirname + '/public'));
+app.use('/js', express.static(__dirname + '/public'));
 
-app.get('*',function(req,res){
-//  console.log(req.originalUrl);
-   res.redirect('/');
+app.get('*', function (req, res) {
+  //  console.log(req.originalUrl);
+  res.redirect('/');
 });
 
 app.listen(config.port, function (err) {
-	if(err){
-    	console.log(err);
-    }
-    else{
-    	console.log("Magic happens @ http://localhost:%s",config.port);
-    }
+  if (err) {
+    console.log(err);
+  } else {
+    console.log("Magic happens @ http://localhost:%s", config.port);
+  }
 });
 
 // exports = module.exports = app;
